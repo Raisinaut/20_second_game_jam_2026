@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://871h3eq6rbp0"]
+
+[ext_resource type="Script" uid="uid://caof4b1niyskh" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="PackedScene" uid="uid://bdsga3vih557r" path="res://scenes/cameras/first_person_camera/first_person_camera.tscn" id="2_dovo2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
+height = 1.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bvnae"]
+height = 1.75
+
+[node name="Player" type="CharacterBody3D" unique_id=2052388260]
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=989643423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_bvnae")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1339732196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("CapsuleMesh_bvnae")
+
+[node name="HeadPosition" type="Node3D" parent="." unique_id=1054445876]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4740498, 0)
+
+[node name="FirstPersonCamera" parent="HeadPosition" unique_id=531707915 instance=ExtResource("2_dovo2")]

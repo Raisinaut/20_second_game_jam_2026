@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://blg4sh7nec4ck"]
+
+[ext_resource type="Texture2D" uid="uid://dsuk862xpbe3a" path="res://assets/textures/temp_grid.png" id="1_bos1t"]
+[ext_resource type="Script" uid="uid://cxno8e6mjx8kv" path="res://scenes/testing/test_environment.gd" id="1_xxu6x"]
+[ext_resource type="PackedScene" uid="uid://871h3eq6rbp0" path="res://scenes/player/player.tscn" id="2_13cf5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5y6t"]
+sky_curve = 0.04307624
+
+[sub_resource type="Sky" id="Sky_82sw0"]
+sky_material = SubResource("ProceduralSkyMaterial_f5y6t")
+
+[sub_resource type="Environment" id="Environment_bvnae"]
+background_mode = 2
+sky = SubResource("Sky_82sw0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqqie"]
+albedo_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+albedo_texture = ExtResource("1_bos1t")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_37yhw"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bvnae"]
+size = Vector3(20, 1, 20)
+
+[node name="World" type="Node3D" unique_id=1155005394]
+script = ExtResource("1_xxu6x")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2063063917]
+environment = SubResource("Environment_bvnae")
+
+[node name="Room" type="Node3D" parent="." unique_id=1471363734]
+
+[node name="Floor" type="StaticBody3D" parent="Room" unique_id=999502518]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor" unique_id=1518994202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_qqqie")
+mesh = SubResource("BoxMesh_37yhw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor" unique_id=1980842503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_bvnae")
+
+[node name="Entities" type="Node3D" parent="." unique_id=1326496761]
+
+[node name="Characters" type="Node3D" parent="Entities" unique_id=1640885216]
+
+[node name="Player" parent="Entities/Characters" unique_id=2052388260 instance=ExtResource("2_13cf5")]
+
+[node name="Objects" type="Node3D" parent="Entities" unique_id=1313379570]
