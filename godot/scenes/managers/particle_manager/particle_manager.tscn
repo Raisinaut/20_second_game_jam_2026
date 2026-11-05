@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dkfsvqvs8mdbt"]
+
+[ext_resource type="Script" uid="uid://13j42agwmdxc" path="res://scenes/managers/particle_manager/particle_manager.gd" id="1_s7eod"]
+[ext_resource type="PackedScene" uid="uid://cgw7y7el3x2wm" path="res://scenes/particles/smoke_puff.tscn" id="2_unov2"]
+
+[node name="ParticleManager" type="Node" unique_id=771983826]
+script = ExtResource("1_s7eod")
+smoke_puff = ExtResource("2_unov2")

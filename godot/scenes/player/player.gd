@@ -7,6 +7,9 @@ const ACCEL := 10.0
 const DECEL := 20.0
 
 @onready var head_position: Node3D = %HeadPosition
+@onready var picker_ray: RayCast3D = %PickerRay
+@onready var hand_position: Node3D = %HandPosition
+@onready var reticle: TextureRect = %Reticle
 
 enum MovementModes {
 	WALK,
@@ -25,19 +28,36 @@ var target_direction := Vector3.ZERO
 var mouse_sensitivity: float = 0.3
 var mouse_smoothing: float = 50
 
+var held_object: Pickable = null
 
 func _ready() -> void:
 	movement_mode = movement_mode
 
 func _process(delta):
-	update_rotation(delta)
-
-func _physics_process(delta):
 	update_input_direction()
 	update_velocity(delta)
+	update_rotation(delta)
+	update_reticle()
+
+func _physics_process(_delta):
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
+	# Object interaction
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("interact"):
+			if picker_ray.is_colliding():
+				held_object = picker_ray.get_collider()
+				held_object.set_holding_node(hand_position)
+				print("Picked up: ", held_object.name)
+		if event.is_action_pressed("drop"):
+			if held_object:
+				print("Dropped: ", held_object.name)
+				var object_to_drop = held_object
+				held_object = null
+				object_to_drop.return_to_spawn()
+	
+	# Movement control
 	if event is InputEventMouseMotion:
 		target_rotation = -Vector2(event.relative.y, event.relative.x)
 	if is_on_floor():
@@ -76,6 +96,10 @@ func update_rotation(delta):
 	head_position.rotate_x(rotation_velocity.x)
 	head_position.rotation.x = clamp(head_position.rotation.x, -PI/2, PI/2)
 	target_rotation = Vector2.ZERO
+
+func update_reticle() -> void:
+	var alpha = 1.0 if picker_ray.is_colliding() else 0.2
+	reticle.modulate.a = alpha
 
 
 # SETTERS ----------------------------------------------------------------------

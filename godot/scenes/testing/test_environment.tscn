@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://blg4sh7nec4ck"]
 
-[ext_resource type="Texture2D" uid="uid://dsuk862xpbe3a" path="res://assets/textures/temp_grid.png" id="1_bos1t"]
+[ext_resource type="Texture2D" uid="uid://dsuk862xpbe3a" path="res://assets/textures/temp/temp_grid.png" id="1_bos1t"]
 [ext_resource type="Script" uid="uid://cxno8e6mjx8kv" path="res://scenes/testing/test_environment.gd" id="1_xxu6x"]
 [ext_resource type="PackedScene" uid="uid://871h3eq6rbp0" path="res://scenes/player/player.tscn" id="2_13cf5"]
+[ext_resource type="PackedScene" uid="uid://dicdakjbcnemo" path="res://scenes/objects/pickable/toadstool/toadstool.tscn" id="4_xxu6x"]
+[ext_resource type="PackedScene" uid="uid://bcat8ykk7v7y3" path="res://scenes/objects/pickable/cauldron/cauldron.tscn" id="5_ml3la"]
+[ext_resource type="PackedScene" uid="uid://ee8n1aghwykx" path="res://scenes/objects/decoration/candle.tscn" id="6_mmlis"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5y6t"]
+sky_top_color = Color(0.033396266, 0.20912126, 0.4279726, 1)
+sky_horizon_color = Color(0.6449089, 0.4168403, 0.3345254, 1)
 sky_curve = 0.04307624
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.6431373, 0.41568628, 0.33333334, 1)
+energy_multiplier = 0.0
 
 [sub_resource type="Sky" id="Sky_82sw0"]
 sky_material = SubResource("ProceduralSkyMaterial_f5y6t")
@@ -13,9 +21,13 @@ sky_material = SubResource("ProceduralSkyMaterial_f5y6t")
 [sub_resource type="Environment" id="Environment_bvnae"]
 background_mode = 2
 sky = SubResource("Sky_82sw0")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqqie"]
-albedo_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
 albedo_texture = ExtResource("1_bos1t")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
@@ -36,6 +48,7 @@ environment = SubResource("Environment_bvnae")
 [node name="Room" type="Node3D" parent="." unique_id=1471363734]
 
 [node name="Floor" type="StaticBody3D" parent="Room" unique_id=999502518]
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor" unique_id=1518994202]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -53,3 +66,15 @@ shape = SubResource("BoxShape3D_bvnae")
 [node name="Player" parent="Entities/Characters" unique_id=2052388260 instance=ExtResource("2_13cf5")]
 
 [node name="Objects" type="Node3D" parent="Entities" unique_id=1313379570]
+
+[node name="Toadstool" parent="Entities/Objects" unique_id=317877809 instance=ExtResource("4_xxu6x")]
+transform = Transform3D(0.49577928, -0.8684486, 0, 0.8684486, 0.49577928, 0, 0, 0, 1, 0, 0.072576195, -2.7665277)
+
+[node name="Cauldron" parent="Entities/Objects" unique_id=549379669 instance=ExtResource("5_ml3la")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8230875, 0, -2.357986)
+
+[node name="Candle" parent="Entities/Objects" unique_id=60882715 instance=ExtResource("6_mmlis")]
+transform = Transform3D(0.9985698, 0, -0.053463403, 0, 1, 0, 0.053463403, 0, 0.9985698, 3.7030826, 0, 0)
+
+[node name="Candle2" parent="Entities/Objects" unique_id=1986836264 instance=ExtResource("6_mmlis")]
+transform = Transform3D(0.9985698, 0, -0.053463403, 0, 1, 0, 0.053463403, 0, 0.9985698, -1.9374783, 0, -0.6414752)

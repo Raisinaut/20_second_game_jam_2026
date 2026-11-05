@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bcat8ykk7v7y3"]
+
+[ext_resource type="PackedScene" uid="uid://do7nqsmobbw7c" path="res://assets/models/cauldron.blend" id="1_oqdbf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oqdbf"]
+height = 0.062927246
+radius = 0.34033203
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37yhw"]
+shading_mode = 0
+albedo_color = Color(0.61969876, 0.9880777, 0.61263597, 1)
+grow_amount = 0.508
+stencil_flags = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_bvnae"]
+material = SubResource("StandardMaterial3D_37yhw")
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 4
+
+[node name="Cauldron" type="Area3D" unique_id=549379669]
+
+[node name="cauldron" parent="." unique_id=1239382698 instance=ExtResource("1_oqdbf")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1017517040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7184523, 0)
+shape = SubResource("CylinderShape3D_oqdbf")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=458365909]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.9338008, 0)
+light_color = Color(0.46569878, 0.92792743, 0.5345112, 1)
+light_energy = 10.829
+shadow_enabled = true
+area_size = Vector2(0.111, 0.48541117)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=335225285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7419002, 0)
+amount = 6
+lifetime = 1.5
+speed_scale = 0.8
+explosiveness = 0.19
+fixed_fps = 15
+mesh = SubResource("SphereMesh_bvnae")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 0.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.15

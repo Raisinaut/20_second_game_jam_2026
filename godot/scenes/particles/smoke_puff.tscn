@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cgw7y7el3x2wm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37yhw"]
+shading_mode = 0
+albedo_color = Color(0.71212995, 0.71212924, 0.71212935, 1)
+texture_filter = 1
+stencil_flags = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_8afob"]
+material = SubResource("StandardMaterial3D_37yhw")
+radius = 0.2
+height = 0.4
+radial_segments = 5
+rings = 2
+
+[sub_resource type="Curve" id="Curve_dovo2"]
+_data = [Vector2(0, 0), 0.0, 11.128573, 0, 0, Vector2(0.2556391, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3311677, 0.0, 0, 0]
+point_count = 3
+
+[node name="SmokePuff" type="CPUParticles3D" unique_id=1182504957]
+cast_shadow = 0
+amount = 20
+lifetime = 0.8
+explosiveness = 1.0
+lifetime_randomness = 0.84
+mesh = SubResource("SphereMesh_8afob")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+damping_min = 1.0
+damping_max = 2.0
+scale_amount_min = 0.2
+scale_amount_curve = SubResource("Curve_dovo2")

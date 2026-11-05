@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dicdakjbcnemo"]
+
+[ext_resource type="Script" uid="uid://jk7levq4tp2a" path="res://scenes/objects/pickable/toadstool/toadstool.gd" id="1_weyqo"]
+[ext_resource type="PackedScene" uid="uid://46l7tv6y4yco" path="res://assets/models/toadstool.blend" id="2_fiysh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weyqo"]
+albedo_color = Color(0.1076903, 0.4432782, 0.6867672, 1)
+roughness = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gmlin"]
+radius = 0.18540272
+
+[node name="Toadstool" type="StaticBody3D" unique_id=164846351]
+collision_layer = 10
+collision_mask = 0
+script = ExtResource("1_weyqo")
+
+[node name="toadstool" parent="." unique_id=318157706 instance=ExtResource("2_fiysh")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.10083252, 0)
+
+[node name="Cap" parent="toadstool" index="0" unique_id=124996367]
+material_override = SubResource("StandardMaterial3D_weyqo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=632228369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.026608884, 0)
+shape = SubResource("SphereShape3D_gmlin")
+
+[editable path="toadstool"]

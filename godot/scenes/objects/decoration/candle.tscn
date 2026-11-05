@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://ee8n1aghwykx"]
+
+[ext_resource type="Script" uid="uid://br4jkfb1a0y5e" path="res://scenes/objects/decoration/candle.gd" id="1_bcqiy"]
+[ext_resource type="PackedScene" uid="uid://cqvrpj3crp65d" path="res://assets/models/candle.blend" id="1_g6fe0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37yhw"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_bvnae"]
+material = SubResource("StandardMaterial3D_37yhw")
+radius = 0.025
+height = 0.05
+
+[sub_resource type="Curve" id="Curve_g6fe0"]
+_data = [Vector2(0, 0), 0.0, 7.9454546, 0, 0, Vector2(0.33082706, 1), 0.0, 0.0, 0, 0, Vector2(0.9999999, 0.009523869), -3.1090913, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_bcqiy"]
+offsets = PackedFloat32Array(0, 0.29166666, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9783711, 0.7794034, 0.41804722, 1, 0.9429186, 0.4532323, 0.38333783, 0.99607843)
+
+[node name="Candle" type="Node3D" unique_id=60882715]
+script = ExtResource("1_bcqiy")
+
+[node name="candle" parent="." unique_id=298708191 instance=ExtResource("1_g6fe0")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=353857727]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44790065, 0)
+light_energy = 0.4
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.005
+omni_range = 3.821
+omni_attenuation = 0.3
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1372550015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34666502, 0)
+cast_shadow = 0
+amount = 12
+lifetime = 0.84
+lifetime_randomness = 0.67
+mesh = SubResource("SphereMesh_bvnae")
+direction = Vector3(0, 1, 0)
+spread = 6.43
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+scale_amount_curve = SubResource("Curve_g6fe0")
+color_ramp = SubResource("Gradient_bcqiy")

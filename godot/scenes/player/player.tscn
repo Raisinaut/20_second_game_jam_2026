@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://871h3eq6rbp0"]
 
 [ext_resource type="Script" uid="uid://caof4b1niyskh" path="res://scenes/player/player.gd" id="1_8afob"]
-[ext_resource type="PackedScene" uid="uid://bdsga3vih557r" path="res://scenes/cameras/first_person_camera/first_person_camera.tscn" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://ckub2rmaqftko" path="res://assets/textures/reticles/crosshair-086.png" id="2_dovo2"]
+[ext_resource type="Script" uid="uid://2k6qewgli2i3" path="res://scenes/player/detection_ray.gd" id="2_gmlin"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
 height = 1.75
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bvnae"]
 height = 1.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
 
 [node name="Player" type="CharacterBody3D" unique_id=2052388260]
 script = ExtResource("1_8afob")
@@ -18,10 +21,48 @@ shape = SubResource("CapsuleShape3D_bvnae")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1339732196]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+cast_shadow = 0
 mesh = SubResource("CapsuleMesh_bvnae")
 
 [node name="HeadPosition" type="Node3D" parent="." unique_id=1054445876]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4740498, 0)
 
-[node name="FirstPersonCamera" parent="HeadPosition" unique_id=531707915 instance=ExtResource("2_dovo2")]
+[node name="Camera3D" type="Camera3D" parent="HeadPosition" unique_id=531707915]
+
+[node name="PickerRay" type="RayCast3D" parent="HeadPosition/Camera3D" unique_id=1482560252]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -1.8)
+collision_mask = 8
+collide_with_areas = true
+script = ExtResource("2_gmlin")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="HeadPosition/Camera3D" unique_id=1061088809]
+light_energy = 0.4
+omni_range = 8.0
+omni_attenuation = 3.0
+
+[node name="HandPosition" type="Node3D" parent="HeadPosition" unique_id=368959386]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -1)
+
+[node name="Visualizer" type="MeshInstance3D" parent="HeadPosition/HandPosition" unique_id=1723913871]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_bvnae")
+
+[node name="Overlay" type="CanvasLayer" parent="." unique_id=441529406]
+
+[node name="CenterContainer" type="CenterContainer" parent="Overlay" unique_id=229399029]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reticle" type="TextureRect" parent="Overlay/CenterContainer" unique_id=2134722596]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("2_dovo2")
+expand_mode = 1
