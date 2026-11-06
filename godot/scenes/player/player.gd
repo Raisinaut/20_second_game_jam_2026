@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 const WALK_SPEED := 3.0
@@ -28,7 +29,7 @@ var target_direction := Vector3.ZERO
 var mouse_sensitivity: float = 0.3
 var mouse_smoothing: float = 50
 
-var held_object: Pickable = null
+var held_object: Interactable = null
 
 func _ready() -> void:
 	movement_mode = movement_mode
@@ -47,21 +48,26 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("interact"):
 			if picker_ray.is_colliding():
-				held_object = picker_ray.get_collider()
-				held_object.set_holding_node(hand_position)
-				print("Picked up: ", held_object.name)
+				var object : Interactable = picker_ray.get_collider()
+				# Hold if not already held
+				if object.can_hold:
+					object.interact(hand_position)
+					held_object = object
+					print("Picked up: ", object.name)
+				else:
+					object.interact()
+					print("Interacted with: ", object.name)
 		if event.is_action_pressed("drop"):
 			if held_object:
 				print("Dropped: ", held_object.name)
-				var object_to_drop = held_object
+				held_object.return_to_spawn()
 				held_object = null
-				object_to_drop.return_to_spawn()
 	
 	# Movement control
 	if event is InputEventMouseMotion:
 		target_rotation = -Vector2(event.relative.y, event.relative.x)
 	if is_on_floor():
-		 #CROUCH
+		 # CROUCH
 		if event.is_action_pressed("crouch") and !event.is_echo():
 			if movement_mode != MovementModes.CROUCH:
 				movement_mode = MovementModes.CROUCH

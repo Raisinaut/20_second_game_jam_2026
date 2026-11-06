@@ -4,25 +4,35 @@
 [ext_resource type="PackedScene" uid="uid://46l7tv6y4yco" path="res://assets/models/toadstool.blend" id="2_fiysh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weyqo"]
-albedo_color = Color(0.1076903, 0.4432782, 0.6867672, 1)
+albedo_color = Color(0.24994221, 0.3756276, 0.14574575, 1)
 roughness = 0.5
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_gmlin"]
-radius = 0.18540272
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_weyqo"]
+points = PackedVector3Array(-0.77929336, 0.32300574, 0.1939489, 0.9735887, 0.023858786, 0.20211354, 0.94861186, 0, 0.19647935, 0.03504336, 0.11552172, -0.9722793, 0.4866348, 0.46164197, -0.23525563, -0.49545622, 0, 0.8158025, 0.12434495, 0.2655869, 0.85595477, -0.87870413, 5.551115e-17, -0.39265776, -0.593489, 0.26717693, -0.7011602, 0.5362, -2.7755576e-17, -0.8054514, -0.22105515, 0.46360487, 0.5028949, 0.7582181, 0.33005947, 0.43043, -0.022131605, 0.4642, -0.523255, 0.2411599, 0, 0.9338227, 0.7346448, 0.29407346, -0.41763026, -0.53566676, 0.4642, -0.009600043, -0.8955754, 0.025695872, 0.41062722, -0.52479917, -5.551115e-17, -0.8054514, -0.31738347, 0.32390612, 0.75445604, 0.32881886, 0.32391423, -0.7442661, 0.37757337, 0.4642, 0.38994914, 0.63530976, 0.025752626, 0.7407374, 0.84823436, 0.024959674, -0.4612122, -0.8622045, 0.17603616, -0.36824015, -0.385791, 0.1155726, 0.89238876, 0.93993604, 0.17547964, 0.08072943, -0.89689523, 0.11558103, 0.38127202, -0.022000628, 0.34969854, -0.75012404, -0.05334342, -2.7755576e-17, -0.9530228, 0.42587817, 0.08555216, -0.8814787, -0.08647457, 0.114319414, 0.96270144, 0.65911466, 0.11697461, 0.7036887)
 
-[node name="Toadstool" type="StaticBody3D" unique_id=164846351]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rhk7f"]
+height = 1.655304
+radius = 1.0668945
+
+[node name="Toadstool" type="RigidBody3D" unique_id=1151911342]
 collision_layer = 10
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_weyqo")
+can_hold = true
+cap_color = Color(0.24994221, 0.3756276, 0.14574575, 1)
 
 [node name="toadstool" parent="." unique_id=318157706 instance=ExtResource("2_fiysh")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.10083252, 0)
 
-[node name="Cap" parent="toadstool" index="0" unique_id=124996367]
+[node name="Cap" parent="toadstool" index="0" unique_id=821806687]
 material_override = SubResource("StandardMaterial3D_weyqo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=632228369]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.026608884, 0)
-shape = SubResource("SphereShape3D_gmlin")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=691523072]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.07147241, 0)
+shape = SubResource("ConvexPolygonShape3D_weyqo")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1125803187]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.023455977, 0)
+shape = SubResource("CylinderShape3D_rhk7f")
 
 [editable path="toadstool"]

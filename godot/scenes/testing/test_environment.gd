@@ -7,11 +7,10 @@ enum MouseModes {
 }
 var mouse_mode = MouseModes.CAMERA : set = set_mouse_mode
 
-@onready var cauldron: Area3D = $Entities/Objects/Cauldron
+@onready var cauldron: = $Entities/Objects/Cauldron
 
 func _ready() -> void:
 	mouse_mode = mouse_mode
-	print(cauldron)
 
 func set_mouse_mode(mode: MouseModes) -> void:
 	mouse_mode = mode

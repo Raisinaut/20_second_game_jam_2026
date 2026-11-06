@@ -13,6 +13,7 @@ height = 1.75
 [sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
 
 [node name="Player" type="CharacterBody3D" unique_id=2052388260]
+collision_layer = 4
 script = ExtResource("1_8afob")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=989643423]
@@ -38,9 +39,9 @@ collide_with_areas = true
 script = ExtResource("2_gmlin")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="HeadPosition/Camera3D" unique_id=1061088809]
-light_energy = 0.4
+light_energy = 0.1
 omni_range = 8.0
-omni_attenuation = 3.0
+omni_attenuation = 0.5
 
 [node name="HandPosition" type="Node3D" parent="HeadPosition" unique_id=368959386]
 unique_name_in_owner = true

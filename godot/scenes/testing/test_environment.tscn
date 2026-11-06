@@ -33,10 +33,13 @@ uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 texture_filter = 0
 
-[sub_resource type="BoxMesh" id="BoxMesh_37yhw"]
+[sub_resource type="BoxMesh" id="BoxMesh_mmlis"]
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bvnae"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_37yhw"]
 size = Vector3(20, 1, 20)
 
 [node name="World" type="Node3D" unique_id=1155005394]
@@ -50,14 +53,44 @@ environment = SubResource("Environment_bvnae")
 [node name="Floor" type="StaticBody3D" parent="Room" unique_id=999502518]
 collision_mask = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor" unique_id=1518994202]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Floor" unique_id=614992792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_qqqie")
-mesh = SubResource("BoxMesh_37yhw")
+mesh = SubResource("BoxMesh_mmlis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor" unique_id=1980842503]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_bvnae")
+
+[node name="Walls" type="StaticBody3D" parent="Room" unique_id=1434283388]
+collision_mask = 0
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Room/Walls" unique_id=964294533]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.5, 9)
+material_override = SubResource("StandardMaterial3D_qqqie")
+mesh = SubResource("BoxMesh_37yhw")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Room/Walls" unique_id=458047601]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 8, -0.5, 1)
+material_override = SubResource("StandardMaterial3D_qqqie")
+mesh = SubResource("BoxMesh_37yhw")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Room/Walls" unique_id=477692002]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, -9, -0.5, 1)
+material_override = SubResource("StandardMaterial3D_qqqie")
+mesh = SubResource("BoxMesh_37yhw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls" unique_id=1518994202]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.5, -8)
+material_override = SubResource("StandardMaterial3D_qqqie")
+mesh = SubResource("BoxMesh_37yhw")
+
+[node name="Ceiling" type="StaticBody3D" parent="Room" unique_id=1768569566]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Ceiling" unique_id=2140899097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = SubResource("StandardMaterial3D_qqqie")
+mesh = SubResource("BoxMesh_mmlis")
 
 [node name="Entities" type="Node3D" parent="." unique_id=1326496761]
 
@@ -68,13 +101,14 @@ shape = SubResource("BoxShape3D_bvnae")
 [node name="Objects" type="Node3D" parent="Entities" unique_id=1313379570]
 
 [node name="Toadstool" parent="Entities/Objects" unique_id=317877809 instance=ExtResource("4_xxu6x")]
-transform = Transform3D(0.49577928, -0.8684486, 0, 0.8684486, 0.49577928, 0, 0, 0, 1, 0, 0.072576195, -2.7665277)
+transform = Transform3D(0.49577928, -0.8684486, 0, 0.8684486, 0.49577928, 0, 0, 0, 1, 0, 0.09020133, -2.7665277)
+cap_color = Color(1, 1, 1, 1)
 
 [node name="Cauldron" parent="Entities/Objects" unique_id=549379669 instance=ExtResource("5_ml3la")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8230875, 0, -2.357986)
 
 [node name="Candle" parent="Entities/Objects" unique_id=60882715 instance=ExtResource("6_mmlis")]
-transform = Transform3D(0.9985698, 0, -0.053463403, 0, 1, 0, 0.053463403, 0, 0.9985698, 3.7030826, 0, 0)
+transform = Transform3D(0.9985698, 0, -0.053463403, 0, 1, 0, 0.053463403, 0, 0.9985698, 5.5187726, 0, -5.890833)
 
 [node name="Candle2" parent="Entities/Objects" unique_id=1986836264 instance=ExtResource("6_mmlis")]
-transform = Transform3D(0.9985698, 0, -0.053463403, 0, 1, 0, 0.053463403, 0, 0.9985698, -1.9374783, 0, -0.6414752)
+transform = Transform3D(0.9985698, 0, -0.053463403, 0, 1, 0, 0.053463403, 0, 0.9985698, -8.282121, 2.227192, -7.3475204)
