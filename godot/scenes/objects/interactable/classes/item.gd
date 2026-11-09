@@ -6,6 +6,7 @@ signal just_consumed
 const MIN_SCALE = Vector3.ONE * 0.001
 
 @onready var spawn_xform = global_transform
+@onready var interact_area: InteractArea = %InteractArea
 
 var scale_tween: Tween = null
 var rot_tween: Tween = null

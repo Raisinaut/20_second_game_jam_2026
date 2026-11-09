@@ -25,8 +25,8 @@ func interact(with_item: Item) -> void:
 
 func add_item_to_mix(item: Item) -> void:
 	items_in_mix.append(item.data)
-	print("added to cauldron: ", item.data.item_name)
-	print("cauldron mix: ", get_mix_content())
+	print("Added to cauldron: ", item.data.item_name)
+	print("Cauldron mix: ", get_mix_content())
 	item.queue_free()
 
 func get_mix_content() -> Array[String]:
