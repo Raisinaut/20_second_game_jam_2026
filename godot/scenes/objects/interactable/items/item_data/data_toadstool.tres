@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dg4kmcfh2knvv"]
+
+[ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://scenes/objects/interactable/items/item_data/_item_data.gd" id="1_f5yr1"]
+
+[resource]
+script = ExtResource("1_f5yr1")
+item_name = "Toadstool"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"

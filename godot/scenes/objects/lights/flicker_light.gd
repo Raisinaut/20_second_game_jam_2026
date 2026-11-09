@@ -7,7 +7,8 @@ extends Light3D
 
 @onready var starting_energy: float = light_energy
 
-var energy_tween: Tween = null
+var light_energy_tween: Tween = null
+var fade_out_time: float = 0.5
 
 func _ready() -> void:
 	flicker()
@@ -16,7 +17,13 @@ func flicker() -> void:
 	var duration: float = randf_range(min_flicker_duration, max_flicker_duration)
 	var energy_delta: float = randf_range(-fluctation, fluctation)
 	var new_energy: float = starting_energy + energy_delta
-	if energy_tween: energy_tween.kill()
-	energy_tween = create_tween()
-	energy_tween.tween_property(self, "light_energy", new_energy, duration)
-	energy_tween.finished.connect(flicker)
+	tween_light_energy(new_energy, duration).finished.connect(flicker)
+
+func fade_out() -> Tween:
+	return tween_light_energy(0, fade_out_time)
+
+func tween_light_energy(val: float, duration: float) -> Tween:
+	if light_energy_tween: light_energy_tween.kill()
+	light_energy_tween = create_tween()
+	light_energy_tween.tween_property(self, "light_energy", val, duration)
+	return light_energy_tween

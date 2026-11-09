@@ -1,33 +1,47 @@
-@tool
-
-class_name Interactable
+class_name Item
 extends RigidBody3D
+
+signal just_consumed
 
 const MIN_SCALE = Vector3.ONE * 0.001
 
 @onready var spawn_xform = global_transform
 
-@export var can_hold: bool = false
-@export var cap_color: Color = Color.WHITE : set = set_cap_color
-
-
 var scale_tween: Tween = null
 var rot_tween: Tween = null
 var holding_node: Node3D = null : set = set_holding_node
-var hold_move_speed: float = 1000
+var hold_move_speed: float = 2000
 var hold_rotation_speed: float = 5
 var reset_duration: float = 0.4
 
+@export var data: ItemData = null
+var consumed: bool = false:
+	set(val):
+		consumed = val
+		if consumed:
+			consume()
+
+
+func _ready() -> void:
+	# Safety Check
+	if data == null:
+		push_error("Add an item_data resource for this item.")
+
+func consume() -> void:
+	print(name, " consumed")
+	just_consumed.emit()
+	holding_node = null
+
 
 # INTERACTION ------------------------------------------------------------------
-func interact(_holding_node: Node3D = null) -> void:
-	if can_hold:
-		holding_node = _holding_node
+func interact(_with_item: Node3D) -> void:
+	print("No interactions programmed for ", name)
 
-func use_with_object(object: Interactable) -> void:
-	object.holding_node = null
-	#var t = create_tween()
-	#t.tween_property(object)
+func hold(_holding_node: Node3D) -> void:
+	holding_node = _holding_node
+
+func drop() -> void:
+	return_to_spawn()
 
 
 # MOVEMENT ---------------------------------------------------------------------
@@ -53,8 +67,10 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 func return_to_spawn() -> void:
 	await spin().finished # remove await here if using shrink tween
 	holding_node = null
+	# Smoke puff before moving
 	ParticleManager.spawn_particle(ParticleManager.ParticleType.SMOKE_PUFF, self)
 	reset_xform()
+	# Smoke puff after moving
 	ParticleManager.spawn_particle(ParticleManager.ParticleType.SMOKE_PUFF, self)
 	grow()
 
@@ -97,13 +113,3 @@ func set_holding_node(node: Node3D) -> void:
 		gravity_scale = 0.0
 	else:
 		can_sleep = true
-
-func set_cap_color(c: Color) -> void:
-	if not is_node_ready():
-		return
-	cap_color = c
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = c
-	mat.roughness = 0.5
-	$toadstool/Cap.material_override = mat
-	print("Toadstool cap color set to: ", mat.albedo_color)

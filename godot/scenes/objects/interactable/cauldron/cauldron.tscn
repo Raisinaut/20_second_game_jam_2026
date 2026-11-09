@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://bcat8ykk7v7y3"]
+
+[ext_resource type="Script" uid="uid://cv31em0i63l4f" path="res://scenes/objects/interactable/cauldron/cauldron.gd" id="1_d36rs"]
+[ext_resource type="PackedScene" uid="uid://do7nqsmobbw7c" path="res://assets/models/cauldron.blend" id="1_rqj0h"]
+[ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="2_d36rs"]
+[ext_resource type="PackedScene" uid="uid://b2x5dvny83jp3" path="res://scenes/objects/interactable/components/interact_area.tscn" id="4_tf0q6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oqdbf"]
+height = 0.11091903
+radius = 0.5395508
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37yhw"]
+shading_mode = 0
+albedo_color = Color(0.61969876, 0.9880777, 0.61263597, 1)
+grow_amount = 0.508
+stencil_flags = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_bvnae"]
+material = SubResource("StandardMaterial3D_37yhw")
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 4
+
+[sub_resource type="Curve" id="Curve_tf0q6"]
+_data = [Vector2(0, 1), 0.0, -0.051212914, 0, 0, Vector2(1, 0), -2.5675676, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bvnae"]
+height = 0.090270996
+radius = 0.5966797
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tf0q6"]
+height = 0.0440979
+radius = 0.3
+
+[node name="Cauldron" type="Area3D" unique_id=1056703813]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_d36rs")
+
+[node name="cauldron" parent="." unique_id=1239382698 instance=ExtResource("1_rqj0h")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1017517040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9916059, 0)
+shape = SubResource("CylinderShape3D_oqdbf")
+
+[node name="BubbleParticles" type="CPUParticles3D" parent="." unique_id=335225285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7419002, 0)
+cast_shadow = 0
+amount = 6
+lifetime = 1.5
+preprocess = 2.0
+speed_scale = 0.8
+explosiveness = 0.19
+fixed_fps = 12
+local_coords = true
+mesh = SubResource("SphereMesh_bvnae")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 0.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.15
+
+[node name="SplashParticles" type="CPUParticles3D" parent="." unique_id=1157837206]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7419002, 0)
+cast_shadow = 0
+amount = 24
+lifetime = 0.8
+speed_scale = 0.8
+explosiveness = 0.9
+lifetime_randomness = 0.76
+local_coords = true
+mesh = SubResource("SphereMesh_bvnae")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 0.0
+direction = Vector3(0, 1, 0)
+spread = 10.3
+gravity = Vector3(0, -6, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.5
+scale_amount_curve = SubResource("Curve_tf0q6")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=353938964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93206596, 0)
+light_color = Color(0.42464867, 0.91187024, 0.46221256, 1)
+light_energy = 4.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_attenuation = 2.0
+script = ExtResource("2_d36rs")
+min_flicker_duration = 0.2
+max_flicker_duration = 0.4
+
+[node name="InteractArea" parent="." unique_id=1977227950 instance=ExtResource("4_tf0q6")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" unique_id=1573584260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99974, 0)
+shape = SubResource("CylinderShape3D_bvnae")
+
+[node name="SplashTrigger" type="Area3D" parent="." unique_id=827208827]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85078406, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SplashTrigger" unique_id=732349534]
+shape = SubResource("CylinderShape3D_tf0q6")

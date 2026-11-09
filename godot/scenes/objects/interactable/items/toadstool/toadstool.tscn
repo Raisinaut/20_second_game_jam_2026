@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dicdakjbcnemo"]
+
+[ext_resource type="Script" uid="uid://cd2dlq2tu7wuf" path="res://scenes/objects/interactable/items/toadstool/toadstool.gd" id="1_sg7us"]
+[ext_resource type="Resource" uid="uid://dg4kmcfh2knvv" path="res://scenes/objects/interactable/items/item_data/data_toadstool.tres" id="2_6h7a6"]
+[ext_resource type="PackedScene" uid="uid://46l7tv6y4yco" path="res://assets/models/toadstool.blend" id="3_p31vq"]
+[ext_resource type="PackedScene" uid="uid://b2x5dvny83jp3" path="res://scenes/objects/interactable/components/interact_area.tscn" id="4_32xam"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lt6vq"]
+albedo_color = Color(0.16107178, 0.47969687, 0.27655485, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bvnae"]
+height = 1.5979004
+radius = 0.99365234
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bvnae"]
+radius = 0.15107296
+
+[node name="Toadstool" type="RigidBody3D" unique_id=1151911342]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_sg7us")
+cap_color = Color(0.16107178, 0.47969687, 0.27655485, 1)
+data = ExtResource("2_6h7a6")
+
+[node name="toadstool" parent="." unique_id=318157706 instance=ExtResource("3_p31vq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.10083252, 0)
+
+[node name="Cap" parent="toadstool" index="0" unique_id=821806687]
+material_override = SubResource("StandardMaterial3D_lt6vq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=200736270]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.022162788, 0)
+shape = SubResource("CylinderShape3D_bvnae")
+
+[node name="InteractArea" parent="." unique_id=1977227950 instance=ExtResource("4_32xam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022353806, 0)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="InteractArea" unique_id=307706186]
+shape = SubResource("SphereShape3D_bvnae")
+
+[editable path="toadstool"]

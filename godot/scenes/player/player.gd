@@ -26,10 +26,11 @@ var target_speed: float = WALK_SPEED
 var input_direction := Vector2.ZERO
 var target_direction := Vector3.ZERO
 
-var mouse_sensitivity: float = 0.3
+var mouse_sensitivity: float = 0.4
 var mouse_smoothing: float = 50
 
-var held_object: Interactable = null
+var held_object: Item = null: set = set_held_object
+
 
 func _ready() -> void:
 	movement_mode = movement_mode
@@ -37,10 +38,11 @@ func _ready() -> void:
 func _process(delta):
 	update_input_direction()
 	update_velocity(delta)
-	update_rotation(delta)
+	
 	update_reticle()
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	update_rotation(delta)
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
@@ -48,15 +50,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("interact"):
 			if picker_ray.is_colliding():
-				var object : Interactable = picker_ray.get_collider()
-				# Hold if not already held
-				if object.can_hold:
-					object.interact(hand_position)
-					held_object = object
-					print("Picked up: ", object.name)
-				else:
-					object.interact()
-					print("Interacted with: ", object.name)
+				var area : InteractArea = picker_ray.get_collider()
+				interact_with_area(area)
 		if event.is_action_pressed("drop"):
 			if held_object:
 				print("Dropped: ", held_object.name)
@@ -79,6 +74,22 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("sprint"):
 			if movement_mode != MovementModes.CROUCH:
 				movement_mode = MovementModes.WALK
+
+func interact_with_area(area: InteractArea) -> void:
+	print()
+	# Attempt to combine
+	if held_object:
+		print("Attempt object combination")
+		area.interact(held_object)
+	else:
+		# Attempt to hold
+		held_object = area.attempt_hold(hand_position)
+		if held_object:
+			print("Held: ", held_object)
+		# Simply interact
+		else:
+			area.interact()
+			print("Interacted with: ", area.name)
 
 
 # UPDATE FUNCTIONS -------------------------------------------------------------
@@ -109,6 +120,17 @@ func update_reticle() -> void:
 
 
 # SETTERS ----------------------------------------------------------------------
+func set_held_object(object: Item) -> void:
+	var held_object_prev: Item = held_object
+	held_object = object
+	if held_object:
+		print("Connect signals to ", object)
+		# Connect signals
+		held_object.just_consumed.connect(_on_held_object_just_consumed)
+	# Disconnect signal from dropped item
+	elif held_object_prev and held_object_prev.just_consumed.is_connected(_on_held_object_just_consumed):
+		held_object_prev.just_consumed.disconnect(_on_held_object_just_consumed)
+
 func set_movement_mode(mode: MovementModes) -> void:
 	movement_mode = mode
 	match(movement_mode):
@@ -118,3 +140,8 @@ func set_movement_mode(mode: MovementModes) -> void:
 			target_speed = CROUCH_SPEED
 		MovementModes.SPRINT:
 			target_speed = SPRINT_SPEED
+
+
+# SIGNALS ----------------------------------------------------------------------
+func _on_held_object_just_consumed() -> void:
+	held_object = null

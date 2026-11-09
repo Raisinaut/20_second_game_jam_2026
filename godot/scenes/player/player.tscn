@@ -30,26 +30,28 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4740498, 0)
 
 [node name="Camera3D" type="Camera3D" parent="HeadPosition" unique_id=531707915]
+physics_interpolation_mode = 1
 
 [node name="PickerRay" type="RayCast3D" parent="HeadPosition/Camera3D" unique_id=1482560252]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -1.8)
+target_position = Vector3(0, 0, -1.9)
 collision_mask = 8
 collide_with_areas = true
 script = ExtResource("2_gmlin")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="HeadPosition/Camera3D" unique_id=1061088809]
+light_color = Color(1, 0.9156667, 0.78, 1)
 light_energy = 0.1
 omni_range = 8.0
 omni_attenuation = 0.5
 
-[node name="HandPosition" type="Node3D" parent="HeadPosition" unique_id=368959386]
+[node name="HandPosition" type="Node3D" parent="HeadPosition" unique_id=368959386 groups=["hotspot"]]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.8)
+visible = false
 
 [node name="Visualizer" type="MeshInstance3D" parent="HeadPosition/HandPosition" unique_id=1723913871]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-visible = false
 mesh = SubResource("BoxMesh_bvnae")
 
 [node name="Overlay" type="CanvasLayer" parent="." unique_id=441529406]
@@ -63,7 +65,7 @@ grow_vertical = 2
 
 [node name="Reticle" type="TextureRect" parent="Overlay/CenterContainer" unique_id=2134722596]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(10, 10)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("2_dovo2")
 expand_mode = 1

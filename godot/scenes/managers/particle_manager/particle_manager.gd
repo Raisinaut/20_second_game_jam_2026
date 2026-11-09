@@ -20,7 +20,7 @@ func spawn_particle(particle_type: ParticleType, parent: Node3D):
 	inst.ready.connect(_on_particle_ready.bind(inst, parent.global_transform))
 	inst.finished.connect(_on_particle_finished.bind(inst))
 	get_tree().get_root().call_deferred("add_child", inst)
-	print("Particle spawned: ", ParticleType.find_key(particle_type))
+	#print("Particle spawned: ", ParticleType.find_key(particle_type))
 
 
 # SIGNALS ----------------------------------------------------------------------

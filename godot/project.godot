@@ -26,6 +26,10 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+hotspot="3d positional nodes that objects snap to"
+
 [input]
 
 move_left={
