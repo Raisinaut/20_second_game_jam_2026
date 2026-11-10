@@ -7,8 +7,6 @@ enum MouseModes {
 }
 var mouse_mode = MouseModes.CAMERA : set = set_mouse_mode
 
-@onready var cauldron: = $Entities/Objects/Cauldron
-
 func _ready() -> void:
 	mouse_mode = mouse_mode
 

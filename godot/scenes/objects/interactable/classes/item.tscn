@@ -5,7 +5,7 @@
 
 [node name="Item" type="RigidBody3D" unique_id=1110393097]
 collision_layer = 2
-collision_mask = 3
+gravity_scale = 0.0
 script = ExtResource("1_jvjik")
 metadata/_custom_type_script = "uid://jk7levq4tp2a"
 

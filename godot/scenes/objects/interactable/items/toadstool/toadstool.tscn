@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://pld6wvrp827m"]
 
 [ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_61yuv"]
+[ext_resource type="Script" uid="uid://cd2dlq2tu7wuf" path="res://scenes/objects/interactable/items/toadstool/toadstool.gd" id="2_6h7a6"]
 [ext_resource type="Resource" uid="uid://dg4kmcfh2knvv" path="res://scenes/objects/interactable/items/item_data/dat_toadstool.tres" id="2_sg7us"]
 [ext_resource type="PackedScene" uid="uid://46l7tv6y4yco" path="res://assets/models/toadstool.blend" id="3_p31vq"]
 
@@ -11,11 +12,13 @@ radius = 0.15107296
 height = 1.5979004
 radius = 0.99365234
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egk34"]
-albedo_color = Color(0.16107178, 0.47969687, 0.27655485, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sg7us"]
+albedo_color = Color(0.17112, 0.31, 0.111600004, 1)
 roughness = 0.5
 
 [node name="Toadstool" unique_id=1110393097 instance=ExtResource("1_61yuv")]
+script = ExtResource("2_6h7a6")
+cap_color = Color(0.17112, 0.31, 0.111600004, 1)
 data = ExtResource("2_sg7us")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=1378257226]
@@ -29,6 +32,6 @@ shape = SubResource("CylinderShape3D_srxvd")
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.10083252, 0)
 
 [node name="Cap" parent="toadstool" index="0" unique_id=821806687]
-material_override = SubResource("StandardMaterial3D_egk34")
+material_override = SubResource("StandardMaterial3D_sg7us")
 
 [editable path="toadstool"]

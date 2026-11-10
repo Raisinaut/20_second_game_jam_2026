@@ -118,13 +118,17 @@ mesh = SubResource("BoxMesh_mmlis")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6842527, -1.1920929e-07, -5.671148)
 
 [node name="Toadstool" parent="Entities/Objects" unique_id=1110393097 instance=ExtResource("4_xxu6x")]
-transform = Transform3D(1, 0, 0, 0, 0.55828625, 0.82964855, 0, -0.82964855, 0.55828625, 1.5379603, 0.08070433, -1.7289648)
+transform = Transform3D(1, 0, 0, 0, 0.55828625, 0.82964855, 0, -0.82964855, 0.55828625, 2.0238025, 0.08070433, -3.0104127)
+collision_mask = 3
+gravity_scale = 1.0
+cap_color = Color(1, 1, 1, 1)
 
 [node name="Candle" parent="Entities/Objects" unique_id=1209938922 instance=ExtResource("6_mmlis")]
-transform = Transform3D(-0.5782272, 0, 0.81587577, 0, 1, 0, -0.81587577, 0, -0.5782272, 3.926455, 0.17675406, -1.9986696)
-
-[node name="Candle3" parent="Entities/Objects" unique_id=682365667 instance=ExtResource("6_mmlis")]
-transform = Transform3D(-0.2637835, 0, -0.9645819, 0, 1, 0, 0.9645819, 0, -0.2637835, 6.533025, 0.17675406, -2.288203)
+transform = Transform3D(-0.5782272, 0, 0.81587577, 0, 1, 0, -0.81587577, 0, -0.5782272, 5.7746787, 0.17675406, -2.523962)
+collision_mask = 3
+gravity_scale = 1.0
 
 [node name="Candle2" parent="Entities/Objects" unique_id=717996105 instance=ExtResource("6_mmlis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6118636, 0.17675406, -4.9258275)
+collision_mask = 3
+gravity_scale = 1.0

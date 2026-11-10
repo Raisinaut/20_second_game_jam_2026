@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://caof4b1niyskh" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://ckub2rmaqftko" path="res://assets/textures/reticles/crosshair-086.png" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://2k6qewgli2i3" path="res://scenes/player/detection_ray.gd" id="2_gmlin"]
+[ext_resource type="Script" uid="uid://iknsftdmwyp" path="res://scenes/player/hand_position.gd" id="3_lvxji"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
 height = 1.75
@@ -48,10 +49,11 @@ omni_attenuation = 0.5
 [node name="HandPosition" type="Node3D" parent="HeadPosition" unique_id=368959386 groups=["hotspot"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.8)
-visible = false
+script = ExtResource("3_lvxji")
 
 [node name="Visualizer" type="MeshInstance3D" parent="HeadPosition/HandPosition" unique_id=1723913871]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_bvnae")
 
 [node name="Overlay" type="CanvasLayer" parent="." unique_id=441529406]
@@ -65,7 +67,7 @@ grow_vertical = 2
 
 [node name="Reticle" type="TextureRect" parent="Overlay/CenterContainer" unique_id=2134722596]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_dovo2")
 expand_mode = 1

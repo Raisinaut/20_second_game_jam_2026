@@ -9,7 +9,7 @@ const DECEL := 20.0
 
 @onready var head_position: Node3D = %HeadPosition
 @onready var picker_ray: RayCast3D = %PickerRay
-@onready var hand_position: Node3D = %HandPosition
+@onready var hand_position = %HandPosition
 @onready var reticle: TextureRect = %Reticle
 
 enum MovementModes {
@@ -18,6 +18,9 @@ enum MovementModes {
 	SPRINT
 }
 
+var mouse_sensitivity: float = 0.4
+var mouse_smoothing: float = 50
+
 var movement_mode := MovementModes.WALK : set = set_movement_mode
 var rotation_velocity := Vector2.ZERO
 var target_rotation := Vector2.ZERO
@@ -25,9 +28,6 @@ var current_speed: float = 0
 var target_speed: float = WALK_SPEED
 var input_direction := Vector2.ZERO
 var target_direction := Vector3.ZERO
-
-var mouse_sensitivity: float = 0.4
-var mouse_smoothing: float = 50
 
 var held_object: Item = null: set = set_held_object
 
@@ -48,6 +48,7 @@ func _physics_process(delta):
 func _input(event: InputEvent) -> void:
 	# Object interaction
 	if event is InputEventMouseButton:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		if event.is_action_pressed("interact"):
 			if picker_ray.is_colliding():
 				var area : InteractArea = picker_ray.get_collider()
@@ -60,7 +61,7 @@ func _input(event: InputEvent) -> void:
 	
 	# Movement control
 	if event is InputEventMouseMotion:
-		target_rotation = -Vector2(event.relative.y, event.relative.x)
+		target_rotation = -Vector2(event.screen_relative.y, event.screen_relative.x)
 	if is_on_floor():
 		 # CROUCH
 		if event.is_action_pressed("crouch") and !event.is_echo():
@@ -80,6 +81,7 @@ func interact_with_area(area: InteractArea) -> void:
 	# Attempt to combine
 	if held_object:
 		print("Attempt object combination")
+		hand_position.poke()
 		area.interact(held_object)
 	else:
 		# Attempt to hold
@@ -90,6 +92,8 @@ func interact_with_area(area: InteractArea) -> void:
 		else:
 			area.interact()
 			print("Interacted with: ", area.name)
+
+
 
 
 # UPDATE FUNCTIONS -------------------------------------------------------------

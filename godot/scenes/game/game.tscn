@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccaejke0gb2f0"]
 
-[ext_resource type="PackedScene" uid="uid://blg4sh7nec4ck" path="res://scenes/testing/test_environment.tscn" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://blg4sh7nec4ck" path="res://scenes/testing/zoo.tscn" id="1_sul5r"]
 
 [node name="Game" type="Node3D" unique_id=37659806]
 

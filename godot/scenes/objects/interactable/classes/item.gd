@@ -5,6 +5,8 @@ signal just_consumed
 
 const MIN_SCALE = Vector3.ONE * 0.001
 
+@export var data: ItemData = null
+
 @onready var spawn_xform = global_transform
 @onready var interact_area: InteractArea = %InteractArea
 
@@ -14,8 +16,8 @@ var holding_node: Node3D = null : set = set_holding_node
 var hold_move_speed: float = 2000
 var hold_rotation_speed: float = 5
 var reset_duration: float = 0.4
+var interaction_disabled: bool = false: set = set_interaction_disabled
 
-@export var data: ItemData = null
 var consumed: bool = false:
 	set(val):
 		consumed = val
@@ -110,7 +112,11 @@ func spin() -> Tween:
 func set_holding_node(node: Node3D) -> void:
 	holding_node = node
 	if holding_node:
-		can_sleep = false
-		gravity_scale = 0.0
+		interaction_disabled = true
 	else:
-		can_sleep = true
+		interaction_disabled = false
+
+func set_interaction_disabled(state: bool) -> void:
+	interaction_disabled = state
+	var collision_shape: CollisionShape3D = interact_area.get_child(0)
+	collision_shape.call_deferred("set_disabled", interaction_disabled)
