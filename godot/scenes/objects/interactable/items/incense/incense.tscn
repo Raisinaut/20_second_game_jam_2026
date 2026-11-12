@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://c4fhdhv71wiv1"]
+
+[ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_mhsor"]
+[ext_resource type="Script" uid="uid://vhghrbjw0bq" path="res://scenes/objects/interactable/items/incense/incense.gd" id="2_6ygk0"]
+[ext_resource type="PackedScene" uid="uid://ccdsagsfavce6" path="res://assets/models/incense_holder_square.blend" id="2_t4noe"]
+[ext_resource type="Resource" uid="uid://dxriy0xfrdmid" path="res://scenes/objects/interactable/items/item_data/dat_incense.tres" id="3_6xbe2"]
+[ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="4_0mscf"]
+[ext_resource type="Texture2D" uid="uid://duactr0pa4emv" path="res://assets/textures/palettes/smoke_01.png" id="4_nkqso"]
+[ext_resource type="SphereMesh" uid="uid://byso6bcbdisoe" path="res://assets/models/particles/smoke_small.tres" id="5_v2rrs"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nkqso"]
+height = 0.41210938
+radius = 0.071777344
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bvnae"]
+height = 0.41210938
+radius = 0.071777344
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7gqa"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_nkqso")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_6hflj"]
+material = SubResource("StandardMaterial3D_k7gqa")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_tu4ly"]
+_data = [Vector2(0, 0), 0.0, 1.6450218, 0, 0, Vector2(0.28195488, 0.25714284), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.8142857, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_a54rm"]
+offsets = PackedFloat32Array(0, 0.20416667, 0.425, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.77, 0.77, 0.77, 1, 0.72464263, 0.7246426, 0.7246426, 0.8691099, 0.5449743, 0.54497427, 0.54497427, 0)
+
+[node name="Incense" unique_id=1110393097 instance=ExtResource("1_mhsor")]
+script = ExtResource("2_6ygk0")
+data = ExtResource("3_6xbe2")
+
+[node name="InteractionCollision" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=1774272885]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182, 0)
+shape = SubResource("CylinderShape3D_nkqso")
+
+[node name="incense_holder_square" parent="." index="1" unique_id=1675412879 instance=ExtResource("2_t4noe")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -0.023973286, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=2037713792]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1820814, 0)
+shape = SubResource("CylinderShape3D_bvnae")
+
+[node name="Light" type="OmniLight3D" parent="." index="3" unique_id=330375582]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377, 0)
+light_color = Color(1, 0.89166665, 0.74, 1)
+light_energy = 0.05
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.005
+omni_range = 6.0
+omni_attenuation = 1.1
+script = ExtResource("4_0mscf")
+fluctation = 0.01
+fade_out_time = 0.2
+
+[node name="SmokeRealistic" type="CPUParticles3D" parent="Light" index="0" unique_id=2012407136]
+unique_name_in_owner = true
+visible = false
+amount = 20
+lifetime = 2.0
+mesh = SubResource("QuadMesh_6hflj")
+direction = Vector3(0, 1, 0)
+spread = 3.85
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 0.05
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+linear_accel_min = 0.05
+linear_accel_max = 0.05
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_tu4ly")
+color_ramp = SubResource("Gradient_a54rm")
+
+[node name="SmokeToon" type="CPUParticles3D" parent="Light" index="1" unique_id=967963503]
+unique_name_in_owner = true
+amount = 12
+lifetime = 2.0
+mesh = ExtResource("5_v2rrs")
+direction = Vector3(0, 1, 0)
+spread = 3.85
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.03
+initial_velocity_max = 0.05
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_tu4ly")
+color_ramp = SubResource("Gradient_a54rm")
+
+[editable path="incense_holder_square"]

@@ -28,7 +28,7 @@ var consumed: bool = false:
 func _ready() -> void:
 	# Safety Check
 	if data == null:
-		push_error("Add an item_data resource for this item.")
+		push_error("Add an item_data resource for ", name)
 
 func consume() -> void:
 	print(name, " consumed")
@@ -37,7 +37,7 @@ func consume() -> void:
 
 
 # INTERACTION ------------------------------------------------------------------
-func interact(_with_item: Node3D) -> void:
+func interact(_with_item: Item) -> void:
 	print("No interactions programmed for ", name)
 
 func hold(_holding_node: Node3D) -> void:

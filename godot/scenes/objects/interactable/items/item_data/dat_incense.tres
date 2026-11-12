@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dxriy0xfrdmid"]
+
+[ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://scenes/objects/interactable/items/item_data/_item_data.gd" id="1_buein"]
+
+[resource]
+script = ExtResource("1_buein")
+item_name = "Incense"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"

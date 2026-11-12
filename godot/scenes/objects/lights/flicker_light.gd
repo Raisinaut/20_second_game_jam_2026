@@ -4,11 +4,12 @@ extends Light3D
 @export var fluctation: float = 0.5
 @export var min_flicker_duration: float = 0.1
 @export var max_flicker_duration: float = 0.2
+@export var fade_out_time: float = 0.5
+@export var fade_in_time: float = 0.2
 
 @onready var starting_energy: float = light_energy
 
 var light_energy_tween: Tween = null
-var fade_out_time: float = 0.5
 
 func _ready() -> void:
 	flicker()
@@ -19,11 +20,14 @@ func flicker() -> void:
 	var new_energy: float = starting_energy + energy_delta
 	tween_light_energy(new_energy, duration).finished.connect(flicker)
 
+func fade_in() -> Tween:
+	return tween_light_energy(starting_energy, fade_in_time)
+
 func fade_out() -> Tween:
 	return tween_light_energy(0, fade_out_time)
 
 func tween_light_energy(val: float, duration: float) -> Tween:
 	if light_energy_tween: light_energy_tween.kill()
-	light_energy_tween = create_tween()
+	light_energy_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	light_energy_tween.tween_property(self, "light_energy", val, duration)
 	return light_energy_tween
