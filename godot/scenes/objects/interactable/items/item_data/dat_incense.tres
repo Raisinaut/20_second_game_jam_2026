@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_buein")
-item_name = "Incense"
+item_name = "Balsam Incense"
 metadata/_custom_type_script = "uid://bs008ddw6s1g8"
