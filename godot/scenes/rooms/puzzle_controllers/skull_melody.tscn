@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://btr2xos1vimxa"]
+
+[ext_resource type="Script" uid="uid://w21vejicvsit" path="res://scenes/rooms/puzzle_controllers/skull_melody.gd" id="1_kmlgk"]
+[ext_resource type="Script" uid="uid://uyhiyg2tjpt4" path="res://data/note_data/_note_data.gd" id="2_4x6vh"]
+
+[sub_resource type="Resource" id="Resource_stq52"]
+script = ExtResource("2_4x6vh")
+note = "F"
+metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
+[sub_resource type="Resource" id="Resource_utctt"]
+script = ExtResource("2_4x6vh")
+note = "A"
+metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
+[node name="SkullMelody" type="Node" unique_id=1947426727]
+script = ExtResource("1_kmlgk")
+target_sequence = Array[ExtResource("2_4x6vh")]([SubResource("Resource_stq52"), SubResource("Resource_utctt")])
+
+[node name="ResetInterval" type="Timer" parent="." unique_id=2118669223]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true

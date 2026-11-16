@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cvb7asqv3njnh"]
+
+[ext_resource type="AudioStream" uid="uid://0uq5g40500sj" path="res://assets/audio/placeholder/placeholder_click.wav" id="1_tqsdw"]
+[ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="2_1p1ju"]
+
+[resource]
+script = ExtResource("2_1p1ju")
+item_name = "Skull"
+impact_sfx = ExtResource("1_tqsdw")
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"

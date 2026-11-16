@@ -11,9 +11,22 @@ extends Light3D
 
 var light_energy_tween: Tween = null
 
+
 func _ready() -> void:
+	turn_on()
+
+
+# STATE CHANGES ----------------------------------------------------------------
+func turn_on() -> void:
+	light_energy = starting_energy
 	flicker()
 
+func turn_off() -> void:
+	light_energy_tween.kill()
+	light_energy = 0
+
+
+# TWEENING ---------------------------------------------------------------------
 func flicker() -> void:
 	var duration: float = randf_range(min_flicker_duration, max_flicker_duration)
 	var energy_delta: float = randf_range(-fluctation, fluctation)

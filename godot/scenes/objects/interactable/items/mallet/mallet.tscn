@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c3mea6qasc10u"]
+
+[ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_iming"]
+[ext_resource type="Resource" uid="uid://bab4mx80enb6q" path="res://data/item_data/dat_mallet.tres" id="2_woyl0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_woyl0"]
+radius = 0.16894531
+height = 0.49295044
+
+[sub_resource type="BoxMesh" id="BoxMesh_82sw0"]
+size = Vector3(0.15, 0.4482422, 0.15)
+
+[node name="Mallet" unique_id=1110393097 instance=ExtResource("1_iming")]
+data = ExtResource("2_woyl0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=710273956]
+shape = SubResource("CapsuleShape3D_woyl0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=600137187]
+shape = SubResource("CapsuleShape3D_woyl0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2" unique_id=184438988]
+mesh = SubResource("BoxMesh_82sw0")

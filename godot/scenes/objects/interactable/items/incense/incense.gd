@@ -25,8 +25,10 @@ var burn_time: float = 4.0 # seconds
 var burn_timer: SceneTreeTimer = null
 var fully_burned: bool = false : set = set_fully_burned
 
+
 func _ready() -> void:
-	# Disable any burning related elements for safety
+	# Initialize nodes and settings
+	set_fully_burned(false)
 	stop_burning()
 
 func _process(_delta: float) -> void:

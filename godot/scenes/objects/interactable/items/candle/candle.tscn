@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_dl1in"]
 [ext_resource type="Script" uid="uid://b0wvbk1jpef58" path="res://scenes/objects/interactable/items/candle/candle.gd" id="1_logp8"]
-[ext_resource type="Resource" uid="uid://b2j2ri0j0nuuw" path="res://scenes/objects/interactable/items/item_data/dat_candle.tres" id="2_3o3cs"]
+[ext_resource type="Resource" uid="uid://b2j2ri0j0nuuw" path="res://data/item_data/dat_candle.tres" id="2_3o3cs"]
 [ext_resource type="PackedScene" uid="uid://cqvrpj3crp65d" path="res://assets/models/candle.blend" id="3_ngktn"]
 [ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="4_y0ay8"]
 

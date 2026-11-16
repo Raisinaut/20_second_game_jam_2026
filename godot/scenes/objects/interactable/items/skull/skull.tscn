@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://0djalyjsk3qx"]
+
+[ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_6yvan"]
+[ext_resource type="Resource" uid="uid://cvb7asqv3njnh" path="res://data/item_data/skulls/dat_skull.tres" id="2_185qa"]
+[ext_resource type="Script" uid="uid://bbupf633dopab" path="res://scenes/objects/interactable/items/skull/skull.gd" id="2_ihoe4"]
+[ext_resource type="PackedScene" uid="uid://cyoesdambibc2" path="res://assets/models/skull.blend" id="2_v0cab"]
+[ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="5_lv8gq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_185qa"]
+radius = 0.16894531
+height = 0.49295044
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxji"]
+radius = 0.16894531
+height = 0.43481445
+
+[node name="Skull" unique_id=1110393097 groups=["melody_member"] instance=ExtResource("1_6yvan")]
+script = ExtResource("2_ihoe4")
+note_name = ""
+note_audio = null
+light_color = Color(1, 1, 1, 1)
+data = ExtResource("2_185qa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=401133999]
+transform = Transform3D(1, 0, 0, 0, 0.29971647, 0.95402855, 0, -0.95402855, 0.29971647, 0, 0.00936804, -0.004137442)
+shape = SubResource("CapsuleShape3D_185qa")
+
+[node name="skull" parent="." index="1" unique_id=1041766556 instance=ExtResource("2_v0cab")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.025401384, -0.04155433)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=1952904928]
+transform = Transform3D(1, 0, 0, 0, 0.16757233, 0.98585993, 0, -0.98585993, 0.16757233, 0, 0.025408104, -0.012962192)
+shape = SubResource("CapsuleShape3D_lvxji")
+
+[node name="ImpactSFX" type="AudioStreamPlayer3D" parent="." index="3" unique_id=1959833566]
+unique_name_in_owner = true
+
+[node name="EyeLight1" type="OmniLight3D" parent="." index="4" unique_id=1438239436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07630421, 0, 0.24259609)
+light_energy = 0.1
+omni_range = 0.8
+omni_attenuation = 2.5
+script = ExtResource("5_lv8gq")
+fade_out_time = 0.8
+fade_in_time = 0.0
+
+[node name="EyeLight2" type="OmniLight3D" parent="." index="5" unique_id=1862124015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05488056, 0, 0.25096494)
+light_energy = 0.1
+omni_range = 0.8
+omni_attenuation = 2.5
+script = ExtResource("5_lv8gq")
+fade_out_time = 0.8
+fade_in_time = 0.0
+
+[editable path="skull"]

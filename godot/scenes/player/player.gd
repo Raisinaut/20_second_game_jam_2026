@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+signal blink_close_finished
+
 const WALK_SPEED := 3.0
 const SPRINT_SPEED := 4.5
 const CROUCH_SPEED := 2.0
@@ -10,7 +12,9 @@ const DECEL := 20.0
 @onready var head_position: Node3D = %HeadPosition
 @onready var picker_ray: RayCast3D = %PickerRay
 @onready var hand_position = %HandPosition
-@onready var reticle: TextureRect = %Reticle
+@onready var reticle = %Reticle
+@onready var screen_blink = %ScreenBlink
+@onready var blink_timer: Timer = %BlinkTimer
 
 enum MovementModes {
 	WALK,
@@ -28,59 +32,86 @@ var current_speed: float = 0
 var target_speed: float = WALK_SPEED
 var input_direction := Vector2.ZERO
 var target_direction := Vector3.ZERO
+var input_disabled: bool = false
+var input_damper: float = 0.0
 
 var held_object: Item = null: set = set_held_object
 
 
 func _ready() -> void:
 	movement_mode = movement_mode
+	blink_timer.start()
+	# INITIAL SCREEN BLINK
+	screen_blink.blink_closed(true)
+	screen_blink.blink_open()
+	# CONNECT SIGNALS
+	blink_timer.timeout.connect(_on_blink_timer_timeout)
+	screen_blink.blink_close_finished.connect(_on_screen_blink_close_finished)
 
 func _process(delta):
 	update_input_direction()
 	update_velocity(delta)
-	
 	update_reticle()
 
 func _physics_process(delta):
 	update_rotation(delta)
 	move_and_slide()
 
+## Dampen a variant value according to the blink closed amount
+func blink_damper(variant: Variant) -> Variant:
+	var damper = ease(screen_blink.get_open_amount(), 0.4)
+	return variant * damper
+
+
+# INPUT EVENTS -----------------------------------------------------------------
 func _input(event: InputEvent) -> void:
+	if event.is_action("blink") && not screen_blink.is_blinking():
+		screen_blink.blink_closed(true)
 	# Object interaction
 	if event is InputEventMouseButton:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		if event.is_action_pressed("interact"):
-			if picker_ray.is_colliding():
-				var area : InteractArea = picker_ray.get_collider()
-				interact_with_area(area)
-		if event.is_action_pressed("drop"):
-			if held_object:
-				print("Dropped: ", held_object.name)
-				held_object.return_to_spawn()
-				held_object = null
-	
-	# Movement control
+		handle_object_interaction(event)
+	# Movement
 	if event is InputEventMouseMotion:
-		target_rotation = -Vector2(event.screen_relative.y, event.screen_relative.x)
-	if is_on_floor():
-		 # CROUCH
-		if event.is_action_pressed("crouch") and !event.is_echo():
-			if movement_mode != MovementModes.CROUCH:
-				movement_mode = MovementModes.CROUCH
-			else:
-				movement_mode = MovementModes.WALK
-		# SPRINT
-		if event.is_action_pressed("sprint") and input_direction.y < 0:
-			movement_mode = MovementModes.SPRINT
-		if event.is_action_released("sprint"):
-			if movement_mode != MovementModes.CROUCH:
-				movement_mode = MovementModes.WALK
+		handle_rotation_event(event)
+	handle_movement_event(event)
+
+func handle_object_interaction(event: InputEvent) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if event.is_action_pressed("interact"):
+		if picker_ray.is_colliding():
+			var area : InteractArea = picker_ray.get_collider()
+			interact_with_area(area)
+	if event.is_action_pressed("drop"):
+		if held_object:
+			print("Dropped: ", held_object.name)
+			held_object.return_to_spawn()
+			held_object = null
+
+func handle_movement_event(event: InputEvent) -> void:
+	if not is_on_floor():
+		return
+	 # CROUCH
+	if event.is_action_pressed("crouch") and !event.is_echo():
+		if movement_mode != MovementModes.CROUCH:
+			movement_mode = MovementModes.CROUCH
+		else:
+			movement_mode = MovementModes.WALK
+	# SPRINT
+	if event.is_action_pressed("sprint") and input_direction.y < 0:
+		movement_mode = MovementModes.SPRINT
+	if event.is_action_released("sprint"):
+		if movement_mode != MovementModes.CROUCH:
+			movement_mode = MovementModes.WALK
+
+func handle_rotation_event(event: InputEvent) -> void:
+	target_rotation = -Vector2(event.screen_relative.y, event.screen_relative.x)
+	target_rotation = blink_damper(target_rotation)
 
 func interact_with_area(area: InteractArea) -> void:
 	print()
 	# Attempt to combine
 	if held_object:
-		print("Attempt object combination")
+		print("Combine objects: ", held_object.name, " and ", area.get_object().name)
 		hand_position.poke()
 		area.interact(held_object)
 	else:
@@ -94,12 +125,11 @@ func interact_with_area(area: InteractArea) -> void:
 			print("Interacted with: ", area.name)
 
 
-
-
 # UPDATE FUNCTIONS -------------------------------------------------------------
 func update_input_direction() -> void:
 	input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	target_direction = (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
+	target_direction = blink_damper(target_direction)
 
 func update_velocity(delta: float) -> void:
 	var new_velocity := Vector3(0, velocity.y, 0)
@@ -149,3 +179,10 @@ func set_movement_mode(mode: MovementModes) -> void:
 # SIGNALS ----------------------------------------------------------------------
 func _on_held_object_just_consumed() -> void:
 	held_object = null
+
+func _on_blink_timer_timeout() -> void:
+	if not screen_blink.is_blinking():
+		screen_blink.blink_closed()
+
+func _on_screen_blink_close_finished() -> void:
+	blink_close_finished.emit()

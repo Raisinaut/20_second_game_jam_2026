@@ -13,16 +13,11 @@ const MIN_SCALE = Vector3.ONE * 0.001
 var scale_tween: Tween = null
 var rot_tween: Tween = null
 var holding_node: Node3D = null : set = set_holding_node
-var hold_move_speed: float = 2000
+var hold_move_speed: float = 1500
 var hold_rotation_speed: float = 5
 var reset_duration: float = 0.4
 var interaction_disabled: bool = false: set = set_interaction_disabled
-
-var consumed: bool = false:
-	set(val):
-		consumed = val
-		if consumed:
-			consume()
+var consumed: bool = false: set = set_consumed
 
 
 func _ready() -> void:
@@ -37,7 +32,8 @@ func consume() -> void:
 
 
 # INTERACTION ------------------------------------------------------------------
-func interact(_with_item: Item) -> void:
+@warning_ignore("unused_parameter")
+func interact(with_item: Item) -> void:
 	print("No interactions programmed for ", name)
 
 func hold(_holding_node: Node3D) -> void:
@@ -120,3 +116,8 @@ func set_interaction_disabled(state: bool) -> void:
 	interaction_disabled = state
 	var collision_shape: CollisionShape3D = interact_area.get_child(0)
 	collision_shape.call_deferred("set_disabled", interaction_disabled)
+
+func set_consumed(state: bool) -> void:
+	consumed = state
+	if consumed:
+		consume()
