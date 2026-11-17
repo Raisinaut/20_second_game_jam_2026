@@ -1,6 +1,8 @@
 class_name Cauldron
 extends Area3D
 
+@export var data: ItemData
+
 @onready var splash_particles: CPUParticles3D = %SplashParticles
 @onready var splash_trigger: Area3D = %SplashTrigger
 

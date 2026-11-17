@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
 
 [node name="SkullMelody" type="Node" unique_id=1947426727]
 script = ExtResource("1_kmlgk")
-target_sequence = Array[ExtResource("2_4x6vh")]([SubResource("Resource_stq52"), SubResource("Resource_utctt")])
+target_sequence = Array[ExtResource("2_4x6vh")]([SubResource("Resource_stq52"), SubResource("Resource_stq52"), SubResource("Resource_utctt"), SubResource("Resource_utctt")])
 
 [node name="ResetInterval" type="Timer" parent="." unique_id=2118669223]
 unique_name_in_owner = true

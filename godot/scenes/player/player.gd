@@ -15,6 +15,7 @@ const DECEL := 20.0
 @onready var reticle = %Reticle
 @onready var screen_blink = %ScreenBlink
 @onready var blink_timer: Timer = %BlinkTimer
+@onready var interaction_ui = %InteractionUI
 
 enum MovementModes {
 	WALK,
@@ -32,8 +33,6 @@ var current_speed: float = 0
 var target_speed: float = WALK_SPEED
 var input_direction := Vector2.ZERO
 var target_direction := Vector3.ZERO
-var input_disabled: bool = false
-var input_damper: float = 0.0
 
 var held_object: Item = null: set = set_held_object
 
@@ -52,13 +51,24 @@ func _process(delta):
 	update_input_direction()
 	update_velocity(delta)
 	update_reticle()
+	var interact_area : InteractArea = picker_ray.get_collider()
+	if interact_area:
+		if held_object:
+			if interact_area.get_object() != held_object:
+				interaction_ui.describe_combination(held_object, interact_area)
+			else:
+				interaction_ui.clear_text()
+		else:
+			interaction_ui.describe_object(interact_area)
+	else:
+		interaction_ui.clear_text()
 
 func _physics_process(delta):
 	update_rotation(delta)
 	move_and_slide()
 
-## Dampen a variant value according to the blink closed amount
-func blink_damper(variant: Variant) -> Variant:
+## Dampen a variant value according to the blink open amount
+func blink_amount_damper(variant: Variant) -> Variant:
 	var damper = ease(screen_blink.get_open_amount(), 0.4)
 	return variant * damper
 
@@ -105,7 +115,7 @@ func handle_movement_event(event: InputEvent) -> void:
 
 func handle_rotation_event(event: InputEvent) -> void:
 	target_rotation = -Vector2(event.screen_relative.y, event.screen_relative.x)
-	target_rotation = blink_damper(target_rotation)
+	target_rotation = blink_amount_damper(target_rotation)
 
 func interact_with_area(area: InteractArea) -> void:
 	print()
@@ -129,7 +139,7 @@ func interact_with_area(area: InteractArea) -> void:
 func update_input_direction() -> void:
 	input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	target_direction = (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
-	target_direction = blink_damper(target_direction)
+	target_direction = blink_amount_damper(target_direction)
 
 func update_velocity(delta: float) -> void:
 	var new_velocity := Vector3(0, velocity.y, 0)

@@ -16,7 +16,7 @@ height = 0.43481445
 
 [node name="Skull" unique_id=1110393097 groups=["melody_member"] instance=ExtResource("1_6yvan")]
 script = ExtResource("2_ihoe4")
-note_name = ""
+note_data = null
 note_audio = null
 light_color = Color(1, 1, 1, 1)
 data = ExtResource("2_185qa")

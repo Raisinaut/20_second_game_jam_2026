@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cv31em0i63l4f" path="res://scenes/objects/interactable/cauldron/cauldron.gd" id="1_d36rs"]
 [ext_resource type="PackedScene" uid="uid://do7nqsmobbw7c" path="res://assets/models/cauldron.blend" id="1_rqj0h"]
 [ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="2_d36rs"]
+[ext_resource type="Resource" uid="uid://8qcd6oc3todb" path="res://data/item_data/dat_cauldron.tres" id="2_q4wah"]
 [ext_resource type="PackedScene" uid="uid://b2x5dvny83jp3" path="res://scenes/objects/interactable/components/interact_area.tscn" id="4_tf0q6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_oqdbf"]
@@ -38,6 +39,7 @@ radius = 0.3
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_d36rs")
+data = ExtResource("2_q4wah")
 
 [node name="cauldron" parent="." unique_id=1239382698 instance=ExtResource("1_rqj0h")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
@@ -73,6 +75,7 @@ initial_velocity_max = 0.15
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7419002, 0)
 cast_shadow = 0
+emitting = false
 amount = 24
 lifetime = 0.8
 speed_scale = 0.8

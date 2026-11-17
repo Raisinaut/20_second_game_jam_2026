@@ -4,8 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ckub2rmaqftko" path="res://assets/textures/reticles/crosshair-086.png" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://2k6qewgli2i3" path="res://scenes/player/detection_ray.gd" id="2_gmlin"]
 [ext_resource type="Script" uid="uid://iknsftdmwyp" path="res://scenes/player/hand_position.gd" id="3_lvxji"]
+[ext_resource type="Texture2D" uid="uid://bqpbkx4kbbe40" path="res://assets/textures/icons/icon_closed_eye.png" id="5_0owmy"]
 [ext_resource type="Shader" uid="uid://dvx18atpmlc16" path="res://shaders/eyelid_blink.gdshader" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://1txdb77f6hi3" path="res://scenes/player/screen_blink.gd" id="6_75vfm"]
+[ext_resource type="FontFile" uid="uid://jd6m8sku4p2" path="res://assets/fonts/Germania_One/GermaniaOne-Regular.ttf" id="7_h17s1"]
+[ext_resource type="Script" uid="uid://k151nb7axhnx" path="res://scenes/player/interaction_ui.gd" id="7_je7p5"]
+[ext_resource type="Texture2D" uid="uid://lwhscsdarwba" path="res://assets/textures/icons/progress_ring.png" id="7_qek5x"]
+[ext_resource type="FontFile" uid="uid://bh0h3emcs11mc" path="res://assets/fonts/New_Rocker/NewRocker-Regular.ttf" id="9_5gtgg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
 height = 1.75
@@ -23,6 +28,16 @@ shader_parameter/edge_blur_amount = 0.27999999374144
 shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0owmy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_37yhw"]
+font = ExtResource("7_h17s1")
+font_size = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75vfm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvnae"]
+font = ExtResource("9_5gtgg")
+font_size = 26
 
 [node name="Player" type="CharacterBody3D" unique_id=2052388260]
 collision_layer = 4
@@ -68,15 +83,14 @@ mesh = SubResource("BoxMesh_bvnae")
 
 [node name="BlinkTimer" type="Timer" parent="." unique_id=1369004800]
 unique_name_in_owner = true
-wait_time = 4.0
+wait_time = 20.0
 one_shot = true
 
 [node name="Overlay" type="CanvasLayer" parent="." unique_id=441529406]
 
 [node name="CenterContainer" type="CenterContainer" parent="Overlay" unique_id=229399029]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -97,3 +111,74 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_0owmy")
 script = ExtResource("6_75vfm")
+
+[node name="InteractionUI" type="MarginContainer" parent="Overlay" unique_id=420793254]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 50
+script = ExtResource("7_je7p5")
+
+[node name="InteractionLabel" type="Label" parent="Overlay/InteractionUI" unique_id=1382448240]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Use [ITEM] with [OTHER ITEM]"
+label_settings = SubResource("LabelSettings_37yhw")
+horizontal_alignment = 1
+
+[node name="BlinkUI" type="MarginContainer" parent="Overlay" unique_id=1496103282]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 50
+
+[node name="ProgressContainer" type="PanelContainer" parent="Overlay/BlinkUI" unique_id=2027282907]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_75vfm")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Overlay/BlinkUI/ProgressContainer" unique_id=585457931]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.62
+fill_mode = 5
+radial_initial_angle = 180.0
+nine_patch_stretch = true
+texture_progress = ExtResource("7_qek5x")
+
+[node name="IconContainer" type="MarginContainer" parent="Overlay/BlinkUI/ProgressContainer" unique_id=1037601699]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="BlinkIcon" type="TextureRect" parent="Overlay/BlinkUI/ProgressContainer/IconContainer" unique_id=111198095]
+layout_mode = 2
+texture = ExtResource("5_0owmy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActionContainer" type="MarginContainer" parent="Overlay/BlinkUI/ProgressContainer" unique_id=1507703787]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="ActionLabel" type="Label" parent="Overlay/BlinkUI/ProgressContainer/ActionContainer" unique_id=246183471]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "E"
+label_settings = SubResource("LabelSettings_bvnae")
