@@ -14,7 +14,7 @@ const DECEL := 20.0
 @onready var hand_position = %HandPosition
 @onready var reticle = %Reticle
 @onready var screen_blink = %ScreenBlink
-@onready var blink_timer: Timer = %BlinkTimer
+@onready var blink_timer = %BlinkTimer
 @onready var interaction_ui = %InteractionUI
 
 enum MovementModes {
@@ -51,17 +51,7 @@ func _process(delta):
 	update_input_direction()
 	update_velocity(delta)
 	update_reticle()
-	var interact_area : InteractArea = picker_ray.get_collider()
-	if interact_area:
-		if held_object:
-			if interact_area.get_object() != held_object:
-				interaction_ui.describe_combination(held_object, interact_area)
-			else:
-				interaction_ui.clear_text()
-		else:
-			interaction_ui.describe_object(interact_area)
-	else:
-		interaction_ui.clear_text()
+	update_interaction_text()
 
 func _physics_process(delta):
 	update_rotation(delta)
@@ -77,6 +67,7 @@ func blink_amount_damper(variant: Variant) -> Variant:
 func _input(event: InputEvent) -> void:
 	if event.is_action("blink") && not screen_blink.is_blinking():
 		screen_blink.blink_closed(true)
+		blink_timer.deplete()
 	# Object interaction
 	if event is InputEventMouseButton:
 		handle_object_interaction(event)
@@ -161,6 +152,19 @@ func update_rotation(delta):
 func update_reticle() -> void:
 	var alpha = 1.0 if picker_ray.is_colliding() else 0.2
 	reticle.modulate.a = alpha
+
+func update_interaction_text() -> void:
+	var interact_area : InteractArea = picker_ray.get_collider()
+	if interact_area:
+		if held_object:
+			if interact_area.get_object() != held_object:
+				interaction_ui.describe_combination(held_object, interact_area)
+			else:
+				interaction_ui.clear_text()
+		else:
+			interaction_ui.describe_object(interact_area)
+	else:
+		interaction_ui.clear_text()
 
 
 # SETTERS ----------------------------------------------------------------------

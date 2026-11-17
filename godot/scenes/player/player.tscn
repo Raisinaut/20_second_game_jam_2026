@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ckub2rmaqftko" path="res://assets/textures/reticles/crosshair-086.png" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://2k6qewgli2i3" path="res://scenes/player/detection_ray.gd" id="2_gmlin"]
 [ext_resource type="Script" uid="uid://iknsftdmwyp" path="res://scenes/player/hand_position.gd" id="3_lvxji"]
+[ext_resource type="Script" uid="uid://bysc1lxgx3cf5" path="res://scenes/player/blink_timer.gd" id="4_fm80t"]
 [ext_resource type="Texture2D" uid="uid://bqpbkx4kbbe40" path="res://assets/textures/icons/icon_closed_eye.png" id="5_0owmy"]
 [ext_resource type="Shader" uid="uid://dvx18atpmlc16" path="res://shaders/eyelid_blink.gdshader" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://1txdb77f6hi3" path="res://scenes/player/screen_blink.gd" id="6_75vfm"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" uid="uid://k151nb7axhnx" path="res://scenes/player/interaction_ui.gd" id="7_je7p5"]
 [ext_resource type="Texture2D" uid="uid://lwhscsdarwba" path="res://assets/textures/icons/progress_ring.png" id="7_qek5x"]
 [ext_resource type="FontFile" uid="uid://bh0h3emcs11mc" path="res://assets/fonts/New_Rocker/NewRocker-Regular.ttf" id="9_5gtgg"]
+[ext_resource type="Script" uid="uid://ssh031oa0qfu" path="res://scenes/player/blink_progess.gd" id="11_gx1jg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
 height = 1.75
@@ -21,6 +23,16 @@ height = 1.75
 [sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
 size = Vector3(0.3, 0.3, 0.3)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75vfm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvnae"]
+font = ExtResource("9_5gtgg")
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_37yhw"]
+font = ExtResource("7_h17s1")
+font_size = 34
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvnae"]
 shader = ExtResource("5_p47bc")
 shader_parameter/open_amount = 0.3999999910592
@@ -28,16 +40,6 @@ shader_parameter/edge_blur_amount = 0.27999999374144
 shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0owmy"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_37yhw"]
-font = ExtResource("7_h17s1")
-font_size = 30
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75vfm"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_bvnae"]
-font = ExtResource("9_5gtgg")
-font_size = 26
 
 [node name="Player" type="CharacterBody3D" unique_id=2052388260]
 collision_layer = 4
@@ -81,10 +83,12 @@ script = ExtResource("3_lvxji")
 visible = false
 mesh = SubResource("BoxMesh_bvnae")
 
-[node name="BlinkTimer" type="Timer" parent="." unique_id=1369004800]
+[node name="BlinkTimer" type="Timer" parent="." unique_id=1369004800 node_paths=PackedStringArray("progress_bar")]
 unique_name_in_owner = true
 wait_time = 20.0
 one_shot = true
+script = ExtResource("4_fm80t")
+progress_bar = NodePath("../Overlay/BlinkUI/ProgressContainer/BlinkProgess")
 
 [node name="Overlay" type="CanvasLayer" parent="." unique_id=441529406]
 
@@ -100,34 +104,6 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_dovo2")
 expand_mode = 1
-
-[node name="ScreenBlink" type="TextureRect" parent="Overlay" unique_id=1450731051]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_bvnae")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_0owmy")
-script = ExtResource("6_75vfm")
-
-[node name="InteractionUI" type="MarginContainer" parent="Overlay" unique_id=420793254]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_bottom = 50
-script = ExtResource("7_je7p5")
-
-[node name="InteractionLabel" type="Label" parent="Overlay/InteractionUI" unique_id=1382448240]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Use [ITEM] with [OTHER ITEM]"
-label_settings = SubResource("LabelSettings_37yhw")
-horizontal_alignment = 1
 
 [node name="BlinkUI" type="MarginContainer" parent="Overlay" unique_id=1496103282]
 unique_name_in_owner = true
@@ -147,18 +123,19 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxEmpty_75vfm")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Overlay/BlinkUI/ProgressContainer" unique_id=585457931]
+[node name="BlinkProgess" type="TextureProgressBar" parent="Overlay/BlinkUI/ProgressContainer" unique_id=585457931]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 max_value = 1.0
-step = 0.01
-value = 0.62
+step = 0.001
+value = 0.89
 fill_mode = 5
 radial_initial_angle = 180.0
 nine_patch_stretch = true
 texture_progress = ExtResource("7_qek5x")
+script = ExtResource("11_gx1jg")
 
 [node name="IconContainer" type="MarginContainer" parent="Overlay/BlinkUI/ProgressContainer" unique_id=1037601699]
 layout_mode = 2
@@ -182,3 +159,31 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "E"
 label_settings = SubResource("LabelSettings_bvnae")
+
+[node name="InteractionUI" type="MarginContainer" parent="Overlay" unique_id=420793254]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 50
+script = ExtResource("7_je7p5")
+
+[node name="InteractionLabel" type="Label" parent="Overlay/InteractionUI" unique_id=1382448240]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Use [ITEM] with [OTHER ITEM]"
+label_settings = SubResource("LabelSettings_37yhw")
+horizontal_alignment = 1
+
+[node name="ScreenBlink" type="TextureRect" parent="Overlay" unique_id=1450731051]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_bvnae")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_0owmy")
+script = ExtResource("6_75vfm")
