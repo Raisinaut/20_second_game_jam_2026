@@ -35,7 +35,7 @@ font_size = 34
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvnae"]
 shader = ExtResource("5_p47bc")
-shader_parameter/open_amount = 0.3999999910592
+shader_parameter/open_amount = 0.999999977648
 shader_parameter/edge_blur_amount = 0.27999999374144
 shader_parameter/color = Color(0, 0, 0, 1)
 
@@ -63,7 +63,7 @@ physics_interpolation_mode = 1
 
 [node name="PickerRay" type="RayCast3D" parent="HeadPosition/Camera3D" unique_id=1482560252]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -1.9)
+target_position = Vector3(0, 0, -2)
 collision_mask = 8
 collide_with_areas = true
 script = ExtResource("2_gmlin")
@@ -100,7 +100,7 @@ grow_vertical = 2
 
 [node name="Reticle" type="TextureRect" parent="Overlay/CenterContainer" unique_id=2134722596]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("2_dovo2")
 expand_mode = 1

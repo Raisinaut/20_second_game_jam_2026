@@ -12,9 +12,9 @@ extends Item
 @onready var ashes: MeshInstance3D = $incense_holder_square/Ashes
 
 # INTIAL VALUES
-@onready var stick_initial_y_scale = stick.scale.y
-@onready var initial_collision_height = physics_collision.shape.height
-@onready var initial_collision_y_position = physics_collision.position.y
+@onready var stick_initial_y_scale = 0.74980771541595 # stick.scale.y
+@onready var initial_collision_height = 0.412109375 # physics_collision.shape.height
+@onready var initial_collision_y_position = 0.18208140134811 # physics_collision.position.y
 @onready var original_item_name: String = data.item_name
 
 var min_collision_height: float = 0.05
@@ -30,13 +30,17 @@ func _ready() -> void:
 	# Initialize nodes and settings
 	set_fully_burned(false)
 	stop_burning()
+	print("stick_initial_y_scale: ", stick_initial_y_scale)
+	print("initial_collision_height: ", initial_collision_height)
+	print("initial_collision_y_position: ", initial_collision_y_position)
+	#tree_exited.connect(set_fully_burned.bind(false))
 
 func _process(_delta: float) -> void:
 	if is_burning():
 		used_amount = get_burn_progress()
 
 func interact(with_item: Item) -> void:
-	if is_burning():
+	if is_burning() or fully_burned:
 		return
 	if with_item.data.item_name == "Candle":
 		start_burning()
@@ -69,6 +73,7 @@ func set_used_amount(val: float) -> void:
 	set_stick_height(used_amount)
 	set_collision_height(used_amount)
 	update_smoke()
+	print("Set used amount in incense: ", used_amount)
 
 func set_fully_burned(state: bool) -> void:
 	fully_burned = state
