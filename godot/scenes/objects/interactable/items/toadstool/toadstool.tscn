@@ -13,12 +13,12 @@ height = 1.5979004
 radius = 0.99365234
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sg7us"]
-albedo_color = Color(0.17112, 0.31, 0.111600004, 1)
-roughness = 0.5
+resource_local_to_scene = true
 
 [node name="Toadstool" unique_id=1110393097 instance=ExtResource("1_61yuv")]
 script = ExtResource("2_6h7a6")
-cap_color = Color(0.17112, 0.31, 0.111600004, 1)
+color_name = ""
+cap_color = Color(1, 1, 1, 1)
 data = ExtResource("2_sg7us")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=1378257226]

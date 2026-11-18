@@ -1,3 +1,4 @@
+@tool
 extends Item
 
 @onready var smoke: CPUParticles3D = %SmokeToon
@@ -10,12 +11,16 @@ extends Item
 # MESHES
 @onready var stick: MeshInstance3D = $incense_holder_square/Stick
 @onready var ashes: MeshInstance3D = $incense_holder_square/Ashes
+@onready var holder: MeshInstance3D = $incense_holder_square/Holder
 
 # INTIAL VALUES
 @onready var stick_initial_y_scale = 0.74980771541595 # stick.scale.y
 @onready var initial_collision_height = 0.412109375 # physics_collision.shape.height
 @onready var initial_collision_y_position = 0.18208140134811 # physics_collision.position.y
-@onready var original_item_name: String = data.item_name
+@onready var original_item_name: String = data.item_name # changed by apply_data_modifiers()
+
+@export var scent: String = "" : set = set_scent
+@export var base_color: Color = Color.WHITE : set = set_base_color
 
 var min_collision_height: float = 0.05
 var min_stick_y_scale: float = 0.1
@@ -27,15 +32,24 @@ var fully_burned: bool = false : set = set_fully_burned
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	apply_data_modifiers()
 	# Initialize nodes and settings
 	set_fully_burned(false)
 	stop_burning()
-	print("stick_initial_y_scale: ", stick_initial_y_scale)
-	print("initial_collision_height: ", initial_collision_height)
-	print("initial_collision_y_position: ", initial_collision_y_position)
-	#tree_exited.connect(set_fully_burned.bind(false))
+
+func apply_data_modifiers() -> void:
+	if scent:
+		# prepend scent to name
+		data.item_name = data.item_name.insert(0, scent + " ")
+		original_item_name = data.item_name
+	else:
+		push_error("No scent configured for ", self)
 
 func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	if is_burning():
 		used_amount = get_burn_progress()
 
@@ -85,6 +99,18 @@ func set_fully_burned(state: bool) -> void:
 		ashes.visible = false
 		stick.visible = true
 		data.item_name = original_item_name
+
+## Includes scent in node name for convenience and clarity.
+func set_scent(new_scent: String) -> void:
+	scent = new_scent
+	name = "Incense" + scent
+
+func set_base_color(c: Color) -> void:
+	base_color = c
+	if not is_node_ready():
+		await ready
+	var mat : StandardMaterial3D = holder.material_override
+	mat.albedo_color = base_color
 
 
 # BURNING ----------------------------------------------------------------------

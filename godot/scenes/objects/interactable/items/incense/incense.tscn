@@ -3,15 +3,27 @@
 [ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_mhsor"]
 [ext_resource type="Script" uid="uid://vhghrbjw0bq" path="res://scenes/objects/interactable/items/incense/incense.gd" id="2_6ygk0"]
 [ext_resource type="PackedScene" uid="uid://ccdsagsfavce6" path="res://assets/models/incense_holder_square.blend" id="2_t4noe"]
-[ext_resource type="Resource" uid="uid://dxriy0xfrdmid" path="res://data/item_data/dat_incense.tres" id="3_6xbe2"]
+[ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="3_0mscf"]
 [ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="4_0mscf"]
 [ext_resource type="SphereMesh" uid="uid://byso6bcbdisoe" path="res://assets/models/particles/smoke_small.tres" id="5_v2rrs"]
 
+[sub_resource type="Resource" id="Resource_0mscf"]
+resource_local_to_scene = true
+script = ExtResource("3_0mscf")
+item_name = "Incense"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nkqso"]
+resource_local_to_scene = true
 height = 0.46923828
 radius = 0.09863281
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xbe2"]
+resource_local_to_scene = true
+roughness = 0.42
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bvnae"]
+resource_local_to_scene = true
 height = 0.41210938
 radius = 0.071777344
 
@@ -25,7 +37,9 @@ colors = PackedColorArray(1, 1, 1, 0, 0.77, 0.77, 0.77, 1, 0.72464263, 0.7246426
 
 [node name="Incense" unique_id=1110393097 instance=ExtResource("1_mhsor")]
 script = ExtResource("2_6ygk0")
-data = ExtResource("3_6xbe2")
+scent = ""
+base_color = Color(1, 1, 1, 1)
+data = SubResource("Resource_0mscf")
 
 [node name="InteractionCollision" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=1774272885]
 unique_name_in_owner = true
@@ -34,6 +48,9 @@ shape = SubResource("CylinderShape3D_nkqso")
 
 [node name="incense_holder_square" parent="." index="1" unique_id=1675412879 instance=ExtResource("2_t4noe")]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -0.023973286, 0)
+
+[node name="Holder" parent="incense_holder_square" index="1" unique_id=1611787399]
+material_override = SubResource("StandardMaterial3D_6xbe2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=2037713792]
 unique_name_in_owner = true

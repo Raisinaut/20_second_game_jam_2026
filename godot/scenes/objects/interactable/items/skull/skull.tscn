@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://0djalyjsk3qx"]
 
 [ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_6yvan"]
-[ext_resource type="Resource" uid="uid://cvb7asqv3njnh" path="res://data/item_data/skulls/dat_skull.tres" id="2_185qa"]
+[ext_resource type="Resource" uid="uid://cvb7asqv3njnh" path="res://data/item_data/dat_skull.tres" id="2_185qa"]
 [ext_resource type="Script" uid="uid://bbupf633dopab" path="res://scenes/objects/interactable/items/skull/skull.gd" id="2_ihoe4"]
 [ext_resource type="PackedScene" uid="uid://cyoesdambibc2" path="res://assets/models/skull.blend" id="2_v0cab"]
 [ext_resource type="Script" uid="uid://e8st8lfqdfn6" path="res://scenes/objects/lights/flicker_light.gd" id="5_lv8gq"]

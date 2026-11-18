@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="1_buein"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_buein")
-item_name = "Balsam Incense"
+item_name = "Incense"
 metadata/_custom_type_script = "uid://bs008ddw6s1g8"

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="1_f5yr1"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_f5yr1")
 item_name = "Toadstool"
 metadata/_custom_type_script = "uid://bs008ddw6s1g8"

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c4fhdhv71wiv1" path="res://scenes/objects/interactable/items/incense/incense.tscn" id="7_nubq1"]
 [ext_resource type="PackedScene" uid="uid://0djalyjsk3qx" path="res://scenes/objects/interactable/items/skull/skull.tscn" id="8_o0cqm"]
 [ext_resource type="Script" uid="uid://uyhiyg2tjpt4" path="res://data/note_data/_note_data.gd" id="10_stq52"]
+[ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="12_utctt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5y6t"]
 sky_top_color = Color(0.033396266, 0.20912126, 0.4279726, 1)
@@ -61,6 +62,18 @@ size = Vector3(20, 1, 20)
 [sub_resource type="BoxMesh" id="BoxMesh_37yhw"]
 size = Vector3(20, 1, 20)
 
+[sub_resource type="Resource" id="Resource_utctt"]
+resource_local_to_scene = true
+script = ExtResource("12_utctt")
+item_name = "Toadstool"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"
+
+[sub_resource type="Resource" id="Resource_5c18r"]
+resource_local_to_scene = true
+script = ExtResource("12_utctt")
+item_name = "Toadstool"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"
+
 [sub_resource type="Resource" id="Resource_kmlgk"]
 script = ExtResource("10_stq52")
 note = "F"
@@ -70,6 +83,18 @@ metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
 script = ExtResource("10_stq52")
 note = "A"
 metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
+[sub_resource type="Resource" id="Resource_se0vl"]
+resource_local_to_scene = true
+script = ExtResource("12_utctt")
+item_name = "Incense"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"
+
+[sub_resource type="Resource" id="Resource_tlfcv"]
+resource_local_to_scene = true
+script = ExtResource("12_utctt")
+item_name = "Incense"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"
 
 [node name="World" type="Node3D" unique_id=1155005394]
 script = ExtResource("1_xxu6x")
@@ -131,17 +156,28 @@ mesh = SubResource("BoxMesh_mmlis")
 
 [node name="Player" parent="Entities/Characters" unique_id=2052388260 instance=ExtResource("2_13cf5")]
 unique_name_in_owner = true
+transform = Transform3D(0.76780486, 0, -0.64068377, 0, 1, 0, 0.64068377, 0, 0.76780486, -0.470199, 0, -1.8642435)
 
 [node name="Objects" type="Node3D" parent="Entities" unique_id=1313379570]
 
 [node name="Cauldron" parent="Entities/Objects" unique_id=549379669 instance=ExtResource("5_ml3la")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6842527, -1.1920929e-07, -5.671148)
 
-[node name="Toadstool" parent="Entities/Objects" unique_id=1110393097 instance=ExtResource("4_xxu6x")]
+[node name="ToadstoolBlue" parent="Entities/Objects" unique_id=1110393097 instance=ExtResource("4_xxu6x")]
 transform = Transform3D(1, 0, 0, 0, 0.55828625, 0.82964855, 0, -0.82964855, 0.55828625, 2.0238025, 0.08070433, -3.0104127)
 collision_mask = 3
 gravity_scale = 1.0
-cap_color = Color(1, 1, 1, 1)
+color_name = "Blue"
+cap_color = Color(0.31911755, 0.6354499, 0.9999998, 1)
+data = SubResource("Resource_utctt")
+
+[node name="ToadstoolGreen" parent="Entities/Objects" unique_id=94954522 instance=ExtResource("4_xxu6x")]
+transform = Transform3D(0.76624954, -0.5330849, 0.35872295, 0, 0.55828625, 0.82964855, -0.6425431, -0.6357178, 0.4277866, 2.4943306, 0.08070433, -3.0342658)
+collision_mask = 3
+gravity_scale = 1.0
+color_name = "Green"
+cap_color = Color(0.31644008, 0.72, 0.29520002, 1)
+data = SubResource("Resource_5c18r")
 
 [node name="Candle" parent="Entities/Objects" unique_id=1209938922 instance=ExtResource("6_mmlis")]
 transform = Transform3D(-0.5782272, 0, 0.81587577, 0, 1, 0, -0.81587577, 0, -0.5782272, 5.7746787, 0.17675406, -2.523962)
@@ -156,15 +192,24 @@ gravity_scale = 1.0
 [node name="Mallet" parent="Entities/Objects" unique_id=1130995784 instance=ExtResource("7_ifrd7")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.22828984, -5.5504656)
 
-[node name="Skull" parent="Entities/Objects" unique_id=619640655 instance=ExtResource("8_o0cqm")]
+[node name="SkullF" parent="Entities/Objects" unique_id=619640655 instance=ExtResource("8_o0cqm")]
 transform = Transform3D(0.9948496, 0.021103755, -0.0991404, 0, 0.97808576, 0.20820253, 0.10136166, -0.20713021, 0.97304827, 2.3855958, 0.17047673, -6.716772)
 note_data = SubResource("Resource_kmlgk")
 light_color = Color(0.6499996, 0, 1, 1)
 
-[node name="Skull2" parent="Entities/Objects" unique_id=117244091 instance=ExtResource("8_o0cqm")]
+[node name="SkullA" parent="Entities/Objects" unique_id=117244091 instance=ExtResource("8_o0cqm")]
 transform = Transform3D(0.8995217, 0.09095868, -0.42730218, -7.0266752e-09, 0.97808576, 0.20820253, 0.43687594, -0.18728268, 0.8798093, 2.9188485, 0.17047673, -6.4781604)
 note_data = SubResource("Resource_stq52")
 light_color = Color(0, 0.51666665, 1, 1)
 
-[node name="Incense" parent="Entities/Objects" unique_id=1342248602 instance=ExtResource("7_nubq1")]
+[node name="IncenseBalsam" parent="Entities/Objects" unique_id=1342248602 instance=ExtResource("7_nubq1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1458263, 0.021975033, -4.673437)
+scent = "Balsam"
+base_color = Color(0.51664335, 0.71, 0.40469998, 1)
+data = SubResource("Resource_se0vl")
+
+[node name="IncenseRose" parent="Entities/Objects" unique_id=966118665 instance=ExtResource("7_nubq1")]
+transform = Transform3D(0.9471109, 0, 0.32090643, 0, 1, 0, -0.32090643, 0, 0.9471109, 2.971653, 0.021975033, -3.393258)
+scent = "Rose"
+base_color = Color(0.75, 0.42000002, 0.62350005, 1)
+data = SubResource("Resource_tlfcv")

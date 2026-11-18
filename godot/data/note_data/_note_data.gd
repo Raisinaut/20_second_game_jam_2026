@@ -1,5 +1,8 @@
+@tool
 class_name NoteData
 extends Resource
+
+signal data_changed
 
 enum Modifiers {
 	NATURAL,
@@ -17,8 +20,8 @@ var notes : Array [String] = [
 	"G"
 ]
 
-@export var note: String
-@export var modifier: Modifiers
+@export var note: String : set = set_note
+@export var modifier: Modifiers : set = set_modifier
 
 func equals(comparison_data: NoteData) -> bool:
 	#print("Compare: ", get_name_string(), " to ", comparison_data.get_name_string())
@@ -48,3 +51,16 @@ func get_name_string() -> String:
 	
 	note_string = notes[note_idx]
 	return note_string + modifier_string
+
+func get_name_string_no_whitespace() -> String:
+	return get_name_string().remove_chars(" ")
+
+
+# SETTERS ----------------------------------------------------------------------
+func set_note(n: String) -> void:
+	note = n
+	data_changed.emit(get_name_string_no_whitespace())
+	
+func set_modifier(m: Modifiers) -> void:
+	modifier = m
+	data_changed.emit(get_name_string_no_whitespace())
