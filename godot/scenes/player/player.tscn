@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://k151nb7axhnx" path="res://scenes/player/interaction_ui.gd" id="7_je7p5"]
 [ext_resource type="Texture2D" uid="uid://lwhscsdarwba" path="res://assets/textures/icons/progress_ring.png" id="7_qek5x"]
 [ext_resource type="FontFile" uid="uid://bh0h3emcs11mc" path="res://assets/fonts/New_Rocker/NewRocker-Regular.ttf" id="9_5gtgg"]
+[ext_resource type="Script" uid="uid://b4xbbxxxgaxgd" path="res://general/utility/alpha_flasher.gd" id="9_fcs02"]
 [ext_resource type="Script" uid="uid://ssh031oa0qfu" path="res://scenes/player/blink_progess.gd" id="11_gx1jg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
@@ -22,6 +23,20 @@ height = 1.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
 size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="GDScript" id="GDScript_ugbui"]
+script/source = "extends MarginContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75vfm"]
 
@@ -116,6 +131,7 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 50
+script = SubResource("GDScript_ugbui")
 
 [node name="ProgressContainer" type="PanelContainer" parent="Overlay/BlinkUI" unique_id=2027282907]
 layout_mode = 2
@@ -136,6 +152,12 @@ radial_initial_angle = 180.0
 nine_patch_stretch = true
 texture_progress = ExtResource("7_qek5x")
 script = ExtResource("11_gx1jg")
+
+[node name="Flasher" type="Node" parent="Overlay/BlinkUI/ProgressContainer/BlinkProgess" unique_id=1673965501]
+script = ExtResource("9_fcs02")
+min_opacity = 0.3
+interval = 0.3
+metadata/_custom_type_script = "uid://b4xbbxxxgaxgd"
 
 [node name="IconContainer" type="MarginContainer" parent="Overlay/BlinkUI/ProgressContainer" unique_id=1037601699]
 layout_mode = 2

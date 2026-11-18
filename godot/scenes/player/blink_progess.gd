@@ -4,10 +4,15 @@ var value_tween: Tween
 var alpha_tween: Tween
 var value_tween_duration: float = 0.25
 var alpha_tween_duration: float = 0.3
+var warning_percent: float = 0.25
+
+@onready var flasher = $Flasher
+
 
 func _ready() -> void:
 	fade(0.0, true)
 	fade(1.0)
+	value_changed.connect(_on_value_changed)
 
 func tween_value(to_value: float) -> void:
 	if value_tween: value_tween.kill()
@@ -21,3 +26,9 @@ func fade(to_value: float, immediate: bool = false) -> void:
 	else:
 		alpha_tween = create_tween()
 		alpha_tween.tween_property(self, "modulate:a", to_value, alpha_tween_duration)
+
+func _on_value_changed(v: float) -> void:
+	if v <= max_value * warning_percent:
+		flasher.active = true
+	else:
+		flasher.active = false
