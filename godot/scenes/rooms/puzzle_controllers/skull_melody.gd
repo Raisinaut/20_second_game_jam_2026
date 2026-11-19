@@ -35,20 +35,26 @@ func input_is_valid() -> bool:
 	return valid
 
 func correct_sequence() -> void:
-	reset_interval.stop()
-	input_sequence.clear()
+	reset()
+	for s: SkullItem in skulls:
+		s.positive_flash()
 	print("Correct melody sequence")
 
 func incorrect_sequence() -> void:
-	input_sequence.clear()
+	reset()
+	for s: SkullItem in skulls:
+		s.warning_flash()
 	print("Incorrect melody sequence")
+
+func reset() -> void:
+	reset_interval.stop()
+	input_sequence.clear()
 
 
 # SIGNALS ----------------------------------------------------------------------
 func _on_skull_note_just_played(note_data: NoteData) -> void:
 	refresh_reset_interval()
 	input_sequence.append(note_data)
-	print("Input melody: ", input_sequence)
 	if input_sequence.size() >= target_sequence.size():
 		var valid = input_is_valid()
 		if valid:

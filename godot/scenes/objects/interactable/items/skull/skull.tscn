@@ -34,21 +34,19 @@ shape = SubResource("CapsuleShape3D_lvxji")
 
 [node name="ImpactSFX" type="AudioStreamPlayer3D" parent="." index="3" unique_id=1959833566]
 unique_name_in_owner = true
+max_distance = 5.0
+max_polyphony = 2
+bus = &"SFX"
 
-[node name="EyeLight1" type="OmniLight3D" parent="." index="4" unique_id=1438239436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07630421, 0, 0.24259609)
-light_energy = 0.1
-omni_range = 0.8
-omni_attenuation = 2.5
-script = ExtResource("5_lv8gq")
-fade_out_time = 0.8
-fade_in_time = 0.0
+[node name="NotePlayer" type="AudioStreamPlayer3D" parent="." index="4" unique_id=337531950]
+unique_name_in_owner = true
 
-[node name="EyeLight2" type="OmniLight3D" parent="." index="5" unique_id=1862124015]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05488056, 0, 0.25096494)
+[node name="EyeLight" type="OmniLight3D" parent="." index="5" unique_id=1438239436]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.042680144, 0.27794805)
 light_energy = 0.1
-omni_range = 0.8
-omni_attenuation = 2.5
+omni_range = 0.2
+omni_attenuation = 3.357
 script = ExtResource("5_lv8gq")
 fade_out_time = 0.8
 fade_in_time = 0.0

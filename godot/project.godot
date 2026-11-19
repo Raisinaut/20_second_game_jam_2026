@@ -15,6 +15,10 @@ run/main_scene="uid://blg4sh7nec4ck"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://bdddmewitv8tm"
+
 [autoload]
 
 ParticleManager="*uid://dkfsvqvs8mdbt"
@@ -29,6 +33,7 @@ window/stretch/aspect="expand"
 [global_group]
 
 melody_member=""
+melody_puzzle=""
 
 [input]
 

@@ -3,19 +3,34 @@
 [ext_resource type="Script" uid="uid://w21vejicvsit" path="res://scenes/rooms/puzzle_controllers/skull_melody.gd" id="1_kmlgk"]
 [ext_resource type="Script" uid="uid://uyhiyg2tjpt4" path="res://data/note_data/_note_data.gd" id="2_4x6vh"]
 
-[sub_resource type="Resource" id="Resource_stq52"]
-script = ExtResource("2_4x6vh")
-note = "F"
-metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
-
-[sub_resource type="Resource" id="Resource_utctt"]
+[sub_resource type="Resource" id="Resource_yto6c"]
 script = ExtResource("2_4x6vh")
 note = "A"
 metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
 
+[sub_resource type="Resource" id="Resource_4x6vh"]
+script = ExtResource("2_4x6vh")
+note = "B"
+metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
+[sub_resource type="Resource" id="Resource_nbaxu"]
+script = ExtResource("2_4x6vh")
+note = "G"
+metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
+[sub_resource type="Resource" id="Resource_h3uks"]
+script = ExtResource("2_4x6vh")
+note = "D"
+metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
+[sub_resource type="Resource" id="Resource_ciuxy"]
+script = ExtResource("2_4x6vh")
+note = "E"
+metadata/_custom_type_script = "uid://uyhiyg2tjpt4"
+
 [node name="SkullMelody" type="Node" unique_id=1947426727]
 script = ExtResource("1_kmlgk")
-target_sequence = Array[ExtResource("2_4x6vh")]([SubResource("Resource_stq52"), SubResource("Resource_stq52"), SubResource("Resource_utctt"), SubResource("Resource_utctt")])
+target_sequence = Array[ExtResource("2_4x6vh")]([SubResource("Resource_yto6c"), SubResource("Resource_4x6vh"), SubResource("Resource_nbaxu"), SubResource("Resource_h3uks"), SubResource("Resource_ciuxy")])
 
 [node name="ResetInterval" type="Timer" parent="." unique_id=2118669223]
 unique_name_in_owner = true

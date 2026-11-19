@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://chmvd7g0v33l5"]
+
+[ext_resource type="Script" uid="uid://c40qw46ny33ci" path="res://scenes/objects/interactable/stations/music_box/music_box.gd" id="1_w46ax"]
+[ext_resource type="Script" uid="uid://dc5gr210sru2n" path="res://scenes/objects/interactable/components/interact_area.gd" id="2_1ocl2"]
+[ext_resource type="Resource" uid="uid://7i55ta8vamra" path="res://data/item_data/dat_music_box.tres" id="2_myqbf"]
+[ext_resource type="AudioStream" uid="uid://dxjiu4d4s2g40" path="res://assets/audio/sfx/music_box_sfx.wav" id="4_myqbf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bvnae"]
+size = Vector3(0.3095703, 0.18395996, 0.3154297)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
+size = Vector3(0.3, 0.17746583, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4qmx"]
+albedo_color = Color(0.3, 0.21420002, 0.14400001, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_myqbf"]
+size = Vector3(0.06347656, 0.043945313, 0.036718756)
+
+[sub_resource type="Animation" id="Animation_dbn28"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_n2k0t"]
+resource_name = "play_melody"
+length = 9.666667
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Melody")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_myqbf")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpoli"]
+_data = {
+&"RESET": SubResource("Animation_dbn28"),
+&"play_melody": SubResource("Animation_n2k0t")
+}
+
+[node name="MusicBox" type="StaticBody3D" unique_id=942542168]
+collision_layer = 2
+script = ExtResource("1_w46ax")
+data = ExtResource("2_myqbf")
+
+[node name="InteractArea" type="Area3D" parent="." unique_id=769446126]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_1ocl2")
+metadata/_custom_type_script = "uid://dc5gr210sru2n"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" unique_id=2089562122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09051514, 0)
+shape = SubResource("BoxShape3D_bvnae")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1669942586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09051514, 0)
+shape = SubResource("BoxShape3D_bvnae")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1962683534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.089567184, 0)
+mesh = SubResource("BoxMesh_bvnae")
+surface_material_override/0 = SubResource("StandardMaterial3D_m4qmx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1943774838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.089567184, 0.15189926)
+mesh = SubResource("BoxMesh_myqbf")
+surface_material_override/0 = SubResource("StandardMaterial3D_m4qmx")
+
+[node name="Melody" type="AudioStreamPlayer3D" parent="." unique_id=1941646927]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+max_distance = 8.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1183813722]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_qpoli")
