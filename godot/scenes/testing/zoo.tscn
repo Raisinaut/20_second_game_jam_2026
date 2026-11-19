@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://blg4sh7nec4ck"]
 
-[ext_resource type="Texture2D" uid="uid://dsuk862xpbe3a" path="res://assets/textures/temp/temp_grid.png" id="1_bos1t"]
 [ext_resource type="Script" uid="uid://cxno8e6mjx8kv" path="res://scenes/testing/test_environment.gd" id="1_xxu6x"]
 [ext_resource type="PackedScene" uid="uid://871h3eq6rbp0" path="res://scenes/player/player.tscn" id="2_13cf5"]
 [ext_resource type="PackedScene" uid="uid://btr2xos1vimxa" path="res://scenes/rooms/puzzle_controllers/skull_melody.tscn" id="2_y3t8x"]
+[ext_resource type="Material" uid="uid://b80mh03wud7mt" path="res://assets/materials/placeholder_mat.tres" id="3_2ppwb"]
 [ext_resource type="PackedScene" uid="uid://pld6wvrp827m" path="res://scenes/objects/interactable/items/toadstool/toadstool.tscn" id="4_xxu6x"]
 [ext_resource type="PackedScene" uid="uid://bcat8ykk7v7y3" path="res://scenes/objects/interactable/cauldron/cauldron.tscn" id="5_ml3la"]
 [ext_resource type="PackedScene" uid="uid://chmvd7g0v33l5" path="res://scenes/objects/interactable/stations/music_box/music_box.tscn" id="5_se0vl"]
@@ -52,13 +52,6 @@ fog_light_energy = 1.94
 fog_density = 0.0096
 fog_depth_begin = 0.0
 fog_depth_end = 10.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqqie"]
-albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
-albedo_texture = ExtResource("1_bos1t")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
-uv1_triplanar = true
-texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_mmlis"]
 size = Vector3(20, 1, 20)
@@ -135,7 +128,7 @@ collision_mask = 0
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Floor" unique_id=614992792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = SubResource("StandardMaterial3D_qqqie")
+material_override = ExtResource("3_2ppwb")
 mesh = SubResource("BoxMesh_mmlis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor" unique_id=1980842503]
@@ -147,29 +140,29 @@ collision_mask = 0
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Room/Walls" unique_id=964294533]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.5, 9)
-material_override = SubResource("StandardMaterial3D_qqqie")
+material_override = ExtResource("3_2ppwb")
 mesh = SubResource("BoxMesh_37yhw")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Room/Walls" unique_id=458047601]
 transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 8, -0.5, 1)
-material_override = SubResource("StandardMaterial3D_qqqie")
+material_override = ExtResource("3_2ppwb")
 mesh = SubResource("BoxMesh_37yhw")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Room/Walls" unique_id=477692002]
 transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, -9, -0.5, 1)
-material_override = SubResource("StandardMaterial3D_qqqie")
+material_override = ExtResource("3_2ppwb")
 mesh = SubResource("BoxMesh_37yhw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Walls" unique_id=1518994202]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.5, -8)
-material_override = SubResource("StandardMaterial3D_qqqie")
+material_override = ExtResource("3_2ppwb")
 mesh = SubResource("BoxMesh_37yhw")
 
 [node name="Ceiling" type="StaticBody3D" parent="Room" unique_id=1768569566]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Ceiling" unique_id=2140899097]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
-material_override = SubResource("StandardMaterial3D_qqqie")
+material_override = ExtResource("3_2ppwb")
 mesh = SubResource("BoxMesh_mmlis")
 
 [node name="Entities" type="Node3D" parent="Room" unique_id=1326496761]
@@ -178,18 +171,18 @@ mesh = SubResource("BoxMesh_mmlis")
 
 [node name="Player" parent="Room/Entities/Characters" unique_id=2052388260 instance=ExtResource("2_13cf5")]
 unique_name_in_owner = true
-transform = Transform3D(0.76780486, 0, -0.64068377, 0, 1, 0, 0.64068377, 0, 0.76780486, -0.470199, 0, -1.8642435)
+transform = Transform3D(0.9665165, 0, -0.25660437, 0, 1, 0, 0.25660437, 0, 0.9665165, 3.768334, 0, -1.8521233)
 
 [node name="Objects" type="Node3D" parent="Room/Entities" unique_id=1997157013]
 
 [node name="MusicBox" parent="Room/Entities/Objects" unique_id=942542168 instance=ExtResource("5_se0vl")]
-transform = Transform3D(0.32333493, 0, -0.94628453, 0, 1, 0, 0.94628453, 0, 0.32333493, 6.307247, 0, -3.9664521)
+transform = Transform3D(-0.12126592, 0, -0.99262, 0, 1, 0, 0.99262, 0, -0.12126592, 6.9314075, 1, -0.793802)
 
 [node name="Cauldron" parent="Room/Entities/Objects" unique_id=549379669 instance=ExtResource("5_ml3la")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6842527, -1.1920929e-07, -5.671148)
 
 [node name="ToadstoolBlue" parent="Room/Entities/Objects" unique_id=1110393097 instance=ExtResource("4_xxu6x")]
-transform = Transform3D(1, 0, 0, 0, 0.55828625, 0.82964855, 0, -0.82964855, 0.55828625, 2.0238025, 0.08070433, -3.0104127)
+transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 7.084276, 1.0956422, -2.7962205)
 collision_mask = 3
 gravity_scale = 1.0
 color_name = "Blue"
@@ -197,7 +190,7 @@ cap_color = Color(0.31911755, 0.6354499, 0.9999998, 1)
 data = SubResource("Resource_ir4gn")
 
 [node name="ToadstoolGreen" parent="Room/Entities/Objects" unique_id=94954522 instance=ExtResource("4_xxu6x")]
-transform = Transform3D(0.76624954, -0.5330849, 0.35872295, 0, 0.55828625, 0.82964855, -0.6425431, -0.6357178, 0.4277866, 2.4943306, 0.08070433, -3.0342658)
+transform = Transform3D(-0.76339144, 0, -0.6459362, 0, 1, 0, 0.64593613, 0, -0.76339155, 7.195592, 1.097644, -2.4706903)
 collision_mask = 3
 gravity_scale = 1.0
 color_name = "Green"
@@ -205,61 +198,78 @@ cap_color = Color(0.36117578, 0.56714976, 0.32918024, 1)
 data = SubResource("Resource_ub5kv")
 
 [node name="Candle" parent="Room/Entities/Objects" unique_id=1209938922 instance=ExtResource("6_mmlis")]
-transform = Transform3D(-0.5782272, 0, 0.81587577, 0, 1, 0, -0.81587577, 0, -0.5782272, 5.7746787, 0.17675406, -2.523962)
+transform = Transform3D(-0.5782272, 0, 0.81587577, 0, 1, 0, -0.81587577, 0, -0.5782272, 6.7746787, 1.176754, -1.7163444)
 collision_mask = 3
 gravity_scale = 1.0
 
 [node name="Candle2" parent="Room/Entities/Objects" unique_id=717996105 instance=ExtResource("6_mmlis")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6118636, 0.17675406, -4.9258275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2585795, 1.176754, -0.024696827)
 collision_mask = 3
 gravity_scale = 1.0
 
 [node name="Mallet" parent="Room/Entities/Objects" unique_id=1130995784 instance=ExtResource("7_ifrd7")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.22828984, -5.5504656)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 2, 1.2282898, -0.5504656)
 
 [node name="IncenseBalsam" parent="Room/Entities/Objects" unique_id=1342248602 instance=ExtResource("7_nubq1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1458263, 0.021975033, -4.673437)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7953525, 1.0219749, -3.6654565)
 scent = "Balsam"
 base_color = Color(0.51664335, 0.71, 0.40469998, 1)
 data = SubResource("Resource_wu4p3")
 
 [node name="IncenseRose" parent="Room/Entities/Objects" unique_id=966118665 instance=ExtResource("7_nubq1")]
-transform = Transform3D(0.9471109, 0, 0.32090643, 0, 1, 0, -0.32090643, 0, 0.9471109, 2.971653, 0.021975033, -3.393258)
+transform = Transform3D(0.9471109, 0, 0.32090643, 0, 1, 0, -0.32090643, 0, 0.9471109, 6.971653, 1.021975, -3.393258)
 scent = "Rose"
 base_color = Color(0.75, 0.42000002, 0.62350005, 1)
 data = SubResource("Resource_rnal7")
 
 [node name="Key" parent="Room/Entities/Objects" unique_id=1479631061 instance=ExtResource("13_5c18r")]
-transform = Transform3D(0.70710677, -0.70710677, -3.090862e-08, 0, -4.371139e-08, 1, -0.70710677, -0.70710677, -3.090862e-08, 2.8464355, 0.052542746, -6.96413)
+transform = Transform3D(0.70710677, -0.70710677, -3.090862e-08, 0, -4.371139e-08, 1, -0.70710677, -0.70710677, -3.090862e-08, 6.8278894, 1.0525427, -0.03759694)
 
 [node name="Skulls" type="Node3D" parent="Room/Entities/Objects" unique_id=994618296]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 1, -4)
 
 [node name="SkullB" parent="Room/Entities/Objects/Skulls" unique_id=162665397 instance=ExtResource("8_o0cqm")]
-transform = Transform3D(0.9094144, 0.08658953, -0.4067768, 9.658564e-09, 0.978086, 0.20820257, 0.4158905, -0.18934244, 0.8894856, 3.4311247, 0.117265105, -6.385958)
+transform = Transform3D(0.9094144, 0.08658953, -0.4067768, 9.658564e-09, 0.978086, 0.20820257, 0.4158905, -0.18934244, 0.8894856, -0.802721, 0.117265105, 3.9485917)
 note_data = SubResource("Resource_2ppwb")
 note_audio = ExtResource("16_sesd5")
 light_color = Color(1, 0.16666669, 0, 1)
 
 [node name="SkullA" parent="Room/Entities/Objects/Skulls" unique_id=117244091 instance=ExtResource("8_o0cqm")]
-transform = Transform3D(0.79006517, 0.12763289, -0.5995889, -7.0266752e-09, 0.97808576, 0.20820253, 0.6130228, -0.16449356, 0.77275145, 2.914526, 0.117265105, -6.472321)
+transform = Transform3D(0.79006517, 0.12763289, -0.5995889, -7.0266752e-09, 0.97808576, 0.20820253, 0.6130228, -0.16449356, 0.77275145, -1.3193197, 0.117265105, 3.8622289)
 note_data = SubResource("Resource_stq52")
 note_audio = ExtResource("19_2ppwb")
 light_color = Color(0, 0.78, 0.12999988, 1)
 
 [node name="SkullG" parent="Room/Entities/Objects/Skulls" unique_id=619640655 instance=ExtResource("8_o0cqm")]
-transform = Transform3D(0.9948496, 0.021103755, -0.0991404, 0, 0.97808576, 0.20820253, 0.10136166, -0.20713021, 0.97304827, 2.3812733, 0.117265105, -6.711503)
+transform = Transform3D(0.9948496, 0.021103755, -0.0991404, 0, 0.97808576, 0.20820253, 0.10136166, -0.20713021, 0.97304827, -1.8525729, 0.117265105, 3.6230469)
 note_data = SubResource("Resource_kmlgk")
 note_audio = ExtResource("13_tlfcv")
 light_color = Color(0, 0.8, 0.8, 1)
 
 [node name="SkullE" parent="Room/Entities/Objects/Skulls" unique_id=384920310 instance=ExtResource("8_o0cqm")]
-transform = Transform3D(0.9957319, 0.019215293, -0.090268835, 1.6023607e-08, 0.9780858, 0.20820254, 0.092291206, -0.20731395, 0.97391135, 1.8272521, 0.117265105, -6.586332)
+transform = Transform3D(0.9957319, 0.019215293, -0.090268835, 1.6023607e-08, 0.9780858, 0.20820254, 0.092291206, -0.20731395, 0.97391135, -2.4065938, 0.117265105, 3.748218)
 note_data = SubResource("Resource_o436v")
 note_audio = ExtResource("17_784yi")
 light_color = Color(0.3739179, 0.21167746, 1, 1)
 
 [node name="SkullD" parent="Room/Entities/Objects/Skulls" unique_id=1727862967 instance=ExtResource("8_o0cqm")]
-transform = Transform3D(0.83127606, -0.11573136, 0.5436782, 1.778428e-08, 0.978086, 0.20820259, -0.5558595, -0.17307387, 0.8130597, 1.1155378, 0.117264986, -6.4131894)
+transform = Transform3D(0.83127606, -0.11573136, 0.5436782, 1.778428e-08, 0.978086, 0.20820259, -0.5558595, -0.17307387, 0.8130597, -3.118308, 0.117264986, 3.9213605)
 note_data = SubResource("Resource_3apjw")
 note_audio = ExtResource("18_784yi")
 light_color = Color(0.94068897, 0.0007441014, 0.9439985, 1)
+
+[node name="Furniture" type="Node3D" parent="Room" unique_id=1173287865]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room/Furniture" unique_id=1006276875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.5, -2)
+use_collision = true
+collision_mask = 0
+size = Vector3(1, 1, 5)
+material = ExtResource("3_2ppwb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Room/Furniture" unique_id=417724332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3.5)
+use_collision = true
+collision_mask = 0
+size = Vector3(1, 1, 8)
+material = ExtResource("3_2ppwb")

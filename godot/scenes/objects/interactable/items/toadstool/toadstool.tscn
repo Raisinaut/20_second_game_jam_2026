@@ -2,8 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_61yuv"]
 [ext_resource type="Script" uid="uid://cd2dlq2tu7wuf" path="res://scenes/objects/interactable/items/toadstool/toadstool.gd" id="2_6h7a6"]
-[ext_resource type="Resource" uid="uid://dg4kmcfh2knvv" path="res://data/item_data/dat_toadstool.tres" id="2_sg7us"]
 [ext_resource type="PackedScene" uid="uid://46l7tv6y4yco" path="res://assets/models/toadstool.blend" id="3_p31vq"]
+[ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="3_sg7us"]
+
+[sub_resource type="Resource" id="Resource_6h7a6"]
+resource_local_to_scene = true
+script = ExtResource("3_sg7us")
+item_name = "Toadstool"
+metadata/_custom_type_script = "uid://bs008ddw6s1g8"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aiwng"]
 radius = 0.15107296
@@ -12,14 +18,14 @@ radius = 0.15107296
 height = 1.5979004
 radius = 0.99365234
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sg7us"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p31vq"]
 resource_local_to_scene = true
 
 [node name="Toadstool" unique_id=1110393097 instance=ExtResource("1_61yuv")]
 script = ExtResource("2_6h7a6")
 color_name = ""
 cap_color = Color(1, 1, 1, 1)
-data = ExtResource("2_sg7us")
+data = SubResource("Resource_6h7a6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=1378257226]
 shape = SubResource("SphereShape3D_aiwng")
@@ -32,6 +38,6 @@ shape = SubResource("CylinderShape3D_srxvd")
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.10083252, 0)
 
 [node name="Cap" parent="toadstool" index="0" unique_id=821806687]
-material_override = SubResource("StandardMaterial3D_sg7us")
+material_override = SubResource("StandardMaterial3D_p31vq")
 
 [editable path="toadstool"]

@@ -34,12 +34,14 @@ shape = SubResource("CapsuleShape3D_lvxji")
 
 [node name="ImpactSFX" type="AudioStreamPlayer3D" parent="." index="3" unique_id=1959833566]
 unique_name_in_owner = true
-max_distance = 5.0
+max_distance = 10.0
 max_polyphony = 2
 bus = &"SFX"
 
 [node name="NotePlayer" type="AudioStreamPlayer3D" parent="." index="4" unique_id=337531950]
 unique_name_in_owner = true
+max_distance = 10.0
+panning_strength = 1.59
 
 [node name="EyeLight" type="OmniLight3D" parent="." index="5" unique_id=1438239436]
 unique_name_in_owner = true

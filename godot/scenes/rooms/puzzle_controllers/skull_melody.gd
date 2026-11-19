@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func connect_to_skull_signals() -> void:
 	for s: SkullItem in skulls:
+		s.tree_exited.connect(_on_skyll_tree_exited.bind(s))
 		s.note_just_played.connect(_on_skull_note_just_played)
 
 
@@ -66,6 +67,8 @@ func _on_skull_note_just_played(note_data: NoteData) -> void:
 func _on_reset_interval_timeout() -> void:
 	incorrect_sequence()
 
+func _on_skyll_tree_exited(s: SkullItem) -> void:
+	skulls.erase(s)
 
 # SETTERS ----------------------------------------------------------------------
 func set_solved(state: bool) -> void:

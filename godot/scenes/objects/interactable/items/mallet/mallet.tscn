@@ -10,7 +10,7 @@ height = 0.49295044
 [sub_resource type="BoxMesh" id="BoxMesh_82sw0"]
 size = Vector3(0.15, 0.4482422, 0.15)
 
-[node name="Mallet" unique_id=1110393097 groups=["melody_puzzle"] instance=ExtResource("1_iming")]
+[node name="Mallet" unique_id=1110393097 instance=ExtResource("1_iming")]
 data = ExtResource("2_woyl0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=710273956]

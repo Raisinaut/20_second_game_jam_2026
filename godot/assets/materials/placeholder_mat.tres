@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b80mh03wud7mt"]
+
+[ext_resource type="Texture2D" uid="uid://dsuk862xpbe3a" path="res://assets/textures/temp/temp_grid.png" id="1_08882"]
+
+[resource]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+albedo_texture = ExtResource("1_08882")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0

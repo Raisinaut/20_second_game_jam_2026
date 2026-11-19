@@ -16,10 +16,8 @@
 [ext_resource type="Script" uid="uid://ssh031oa0qfu" path="res://scenes/player/blink_progess.gd" id="11_gx1jg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
-height = 1.75
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bvnae"]
-height = 1.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -61,17 +59,17 @@ collision_layer = 4
 script = ExtResource("1_8afob")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=989643423]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_bvnae")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1339732196]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_bvnae")
 
 [node name="HeadPosition" type="Node3D" parent="." unique_id=1054445876]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4740498, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6707466, 0)
 
 [node name="Camera3D" type="Camera3D" parent="HeadPosition" unique_id=531707915]
 physics_interpolation_mode = 1
