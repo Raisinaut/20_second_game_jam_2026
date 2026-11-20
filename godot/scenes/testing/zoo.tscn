@@ -176,7 +176,7 @@ transform = Transform3D(0.9665165, 0, -0.25660437, 0, 1, 0, 0.25660437, 0, 0.966
 [node name="Objects" type="Node3D" parent="Room/Entities" unique_id=1997157013]
 
 [node name="MusicBox" parent="Room/Entities/Objects" unique_id=942542168 instance=ExtResource("5_se0vl")]
-transform = Transform3D(-0.12126592, 0, -0.99262, 0, 1, 0, 0.99262, 0, -0.12126592, 6.9314075, 1, -0.793802)
+transform = Transform3D(-0.96900487, 0, -0.24704131, 0, 1, 0, 0.24704131, 0, -0.96900487, 6.9314075, 1, -0.793802)
 
 [node name="Cauldron" parent="Room/Entities/Objects" unique_id=549379669 instance=ExtResource("5_ml3la")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6842527, -1.1920929e-07, -5.671148)
@@ -198,7 +198,7 @@ cap_color = Color(0.36117578, 0.56714976, 0.32918024, 1)
 data = SubResource("Resource_ub5kv")
 
 [node name="Candle" parent="Room/Entities/Objects" unique_id=1209938922 instance=ExtResource("6_mmlis")]
-transform = Transform3D(-0.5782272, 0, 0.81587577, 0, 1, 0, -0.81587577, 0, -0.5782272, 6.7746787, 1.176754, -1.7163444)
+transform = Transform3D(0.6715029, 0, -0.74100196, 0, 1, 0, 0.74100196, 0, 0.6715029, 6.7746787, 1.176754, -1.7163444)
 collision_mask = 3
 gravity_scale = 1.0
 
@@ -223,7 +223,7 @@ base_color = Color(0.75, 0.42000002, 0.62350005, 1)
 data = SubResource("Resource_rnal7")
 
 [node name="Key" parent="Room/Entities/Objects" unique_id=1479631061 instance=ExtResource("13_5c18r")]
-transform = Transform3D(0.70710677, -0.70710677, -3.090862e-08, 0, -4.371139e-08, 1, -0.70710677, -0.70710677, -3.090862e-08, 6.8278894, 1.0525427, -0.03759694)
+transform = Transform3D(-3.877966e-08, 0.8871753, -0.46143228, -0.9999999, -4.3711378e-08, 0, -2.0169841e-08, 0.46143222, 0.88717544, 7.1226044, 1.014621, -1.2864566)
 
 [node name="Skulls" type="Node3D" parent="Room/Entities/Objects" unique_id=994618296]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 1, -4)

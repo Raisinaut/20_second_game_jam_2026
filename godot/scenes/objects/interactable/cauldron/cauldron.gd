@@ -22,6 +22,7 @@ func interact(with_item: Item) -> void:
 		print("I'm not holding anything to add.")
 		return
 	with_item.consumed = true
+	with_item.interaction_disabled = true
 	await animate_item_addition(with_item).finished
 	add_item_to_mix(with_item)
 

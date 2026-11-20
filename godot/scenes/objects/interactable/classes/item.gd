@@ -63,8 +63,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		state.linear_velocity = Vector3.ZERO
 		state.angular_velocity = Vector3.ZERO
 
-func return_to_spawn() -> void:
-	await spin().finished # remove await here if using shrink tween
+func return_to_spawn(animate_spin: bool = true) -> void:
+	if animate_spin:
+		await spin().finished # remove await here if using shrink tween
 	holding_node = null
 	# Smoke puff before moving
 	ParticleManager.spawn_particle(ParticleManager.ParticleType.SMOKE_PUFF, self)

@@ -1,6 +1,9 @@
 class_name InteractArea
 extends Area3D
 
+@onready var collision: CollisionShape3D = get_child(0)
+
+var disabled: bool = false : set = set_disabled
 
 func interact(with_item: Node = null) -> void:
 	var object = get_object()
@@ -30,3 +33,7 @@ func can_hold() -> bool:
 	if get_object().has_method("hold"):
 		object_can_hold = true
 	return object_can_hold
+
+func set_disabled(state: bool) -> void:
+	disabled = state
+	collision.call_deferred("set_disabled", disabled)

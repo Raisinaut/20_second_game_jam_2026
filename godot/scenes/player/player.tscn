@@ -89,7 +89,7 @@ omni_attenuation = 0.5
 
 [node name="HandPosition" type="Node3D" parent="HeadPosition" unique_id=368959386]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.25, -0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.25, -0.8)
 script = ExtResource("3_lvxji")
 
 [node name="Visualizer" type="MeshInstance3D" parent="HeadPosition/HandPosition" unique_id=1723913871]
