@@ -2,22 +2,34 @@
 
 [ext_resource type="PackedScene" uid="uid://cml0impkbvy2a" path="res://scenes/objects/interactable/classes/item.tscn" id="1_iming"]
 [ext_resource type="Resource" uid="uid://bab4mx80enb6q" path="res://data/item_data/dat_mallet.tres" id="2_woyl0"]
+[ext_resource type="PackedScene" uid="uid://rttsqlynhy1n" path="res://assets/models/mallet.blend" id="3_qrqyl"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_woyl0"]
-radius = 0.16894531
-height = 0.49295044
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bvnae"]
+height = 0.46520996
+radius = 0.05908203
 
-[sub_resource type="BoxMesh" id="BoxMesh_82sw0"]
-size = Vector3(0.15, 0.4482422, 0.15)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_37yhw"]
+height = 0.08963013
+radius = 0.060546875
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bsvlx"]
+height = 0.3776245
+radius = 0.028320313
 
 [node name="Mallet" unique_id=1110393097 instance=ExtResource("1_iming")]
 data = ExtResource("2_woyl0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=710273956]
-shape = SubResource("CapsuleShape3D_woyl0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00030517578, 0)
+shape = SubResource("CylinderShape3D_bvnae")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=600137187]
-shape = SubResource("CapsuleShape3D_woyl0")
+[node name="HeadCollision" type="CollisionShape3D" parent="." index="1" unique_id=600137187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18678284, 0)
+shape = SubResource("CylinderShape3D_37yhw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2" unique_id=184438988]
-mesh = SubResource("BoxMesh_82sw0")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2" unique_id=1069526693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04232788, 0)
+shape = SubResource("CylinderShape3D_bsvlx")
+
+[node name="mallet" parent="." index="3" unique_id=1076886630 instance=ExtResource("3_qrqyl")]
+transform = Transform3D(0.055, 0, 0, 0, 0.055, 0, 0, 0, 0.055, 0, -0.19914728, 0)

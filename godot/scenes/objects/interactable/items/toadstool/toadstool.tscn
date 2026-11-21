@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://46l7tv6y4yco" path="res://assets/models/toadstool.blend" id="3_p31vq"]
 [ext_resource type="Script" uid="uid://bs008ddw6s1g8" path="res://data/item_data/_item_data.gd" id="3_sg7us"]
 
-[sub_resource type="Resource" id="Resource_6h7a6"]
+[sub_resource type="Resource" id="Resource_sg7us"]
 resource_local_to_scene = true
 script = ExtResource("3_sg7us")
 item_name = "Toadstool"
@@ -15,29 +15,37 @@ metadata/_custom_type_script = "uid://bs008ddw6s1g8"
 radius = 0.15107296
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_srxvd"]
-height = 1.5979004
+height = 0.4840088
 radius = 0.99365234
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p31vq"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sg7us"]
+height = 1.1656799
+radius = 0.19677734
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6h7a6"]
 resource_local_to_scene = true
 
 [node name="Toadstool" unique_id=1110393097 instance=ExtResource("1_61yuv")]
 script = ExtResource("2_6h7a6")
 color_name = ""
 cap_color = Color(1, 1, 1, 1)
-data = SubResource("Resource_6h7a6")
+data = SubResource("Resource_sg7us")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" parent_id_path=PackedInt32Array(769446126) index="0" unique_id=1378257226]
 shape = SubResource("SphereShape3D_aiwng")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1938602227]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.022162788, 0)
+[node name="CapCollision" type="CollisionShape3D" parent="." index="1" unique_id=1938602227]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.10570466, 0)
 shape = SubResource("CylinderShape3D_srxvd")
 
-[node name="toadstool" parent="." index="2" unique_id=1226343750 instance=ExtResource("3_p31vq")]
+[node name="StemCollision" type="CollisionShape3D" parent="." index="2" unique_id=612949252]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.01210679, 0)
+shape = SubResource("CylinderShape3D_sg7us")
+
+[node name="toadstool" parent="." index="3" unique_id=1226343750 instance=ExtResource("3_p31vq")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.10083252, 0)
 
 [node name="Cap" parent="toadstool" index="0" unique_id=821806687]
-material_override = SubResource("StandardMaterial3D_p31vq")
+material_override = SubResource("StandardMaterial3D_6h7a6")
 
 [editable path="toadstool"]

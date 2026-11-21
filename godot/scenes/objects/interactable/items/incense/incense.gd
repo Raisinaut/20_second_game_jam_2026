@@ -1,5 +1,9 @@
 @tool
+class_name Incense
 extends Item
+
+signal started_burning(scent: String)
+signal stopped_burning(scent: String)
 
 @onready var smoke: CPUParticles3D = %SmokeToon
 @onready var light: FlickerLight3D = %Light
@@ -26,7 +30,7 @@ var min_collision_height: float = 0.05
 var min_stick_y_scale: float = 0.1
 
 var used_amount: float = 0.0 : set = set_used_amount
-var burn_time: float = 4.0 # seconds
+var burn_time: float = 5.0 # seconds
 var burn_timer: SceneTreeTimer = null
 var fully_burned: bool = false : set = set_fully_burned
 
@@ -64,7 +68,7 @@ func set_stick_height(val: float) -> void:
 	stick.scale.y = actual_y_scale
 
 func update_smoke() -> void:
-	light.position.y = get_collision_height()
+	light.position.y = get_collision_height() * 0.9
 
 
 # COLLISION --------------------------------------------------------------------
@@ -87,7 +91,6 @@ func set_used_amount(val: float) -> void:
 	set_stick_height(used_amount)
 	set_collision_height(used_amount)
 	update_smoke()
-	print("Set used amount in incense: ", used_amount)
 
 func set_fully_burned(state: bool) -> void:
 	fully_burned = state
@@ -115,14 +118,18 @@ func set_base_color(c: Color) -> void:
 
 # BURNING ----------------------------------------------------------------------
 func stop_burning() -> void:
-	light.fade_out()
 	smoke.emitting = false
+	stopped_burning.emit(scent)
+	await light.fade_out().finished
+	light.hide()
 
 func start_burning() -> void:
+	light.show()
 	light.fade_in()
 	smoke.emitting = true
 	burn_timer = get_tree().create_timer(burn_time)
 	burn_timer.timeout.connect(_on_burn_timer_timeout)
+	started_burning.emit(scent)
 
 func is_burning() -> bool:
 	return burn_timer and burn_timer.time_left > 0

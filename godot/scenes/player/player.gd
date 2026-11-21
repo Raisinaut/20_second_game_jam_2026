@@ -16,6 +16,7 @@ const DECEL := 20.0
 @onready var screen_blink = %ScreenBlink
 @onready var blink_timer = %BlinkTimer
 @onready var interaction_ui = %InteractionUI
+@onready var hallucination = %Hallucination
 
 enum MovementModes {
 	WALK,
@@ -26,6 +27,7 @@ enum MovementModes {
 var mouse_sensitivity: float = 0.4
 var mouse_smoothing: float = 50
 
+var input_disabled: bool = false
 var movement_mode := MovementModes.WALK : set = set_movement_mode
 var rotation_velocity := Vector2.ZERO
 var target_rotation := Vector2.ZERO
@@ -38,6 +40,7 @@ var held_object: Item = null: set = set_held_object
 
 
 func _ready() -> void:
+	GameManager.player = self
 	movement_mode = movement_mode
 	blink_timer.start()
 	# INITIAL SCREEN BLINK
@@ -62,9 +65,15 @@ func blink_amount_damper(variant: Variant) -> Variant:
 	var damper = ease(screen_blink.get_open_amount(), 0.4)
 	return variant * damper
 
+func hallucinate() -> void:
+	hallucination.animate()
+
 
 # INPUT EVENTS -----------------------------------------------------------------
 func _input(event: InputEvent) -> void:
+	if input_disabled:
+		return
+	
 	if event.is_action("blink") && not screen_blink.is_blinking():
 		screen_blink.blink_closed(true)
 		blink_timer.deplete()

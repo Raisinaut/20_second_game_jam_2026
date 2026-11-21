@@ -14,7 +14,7 @@ length = 0.001
 
 [sub_resource type="Animation" id="Animation_n2k0t"]
 resource_name = "play_melody"
-length = 9.733334
+length = 9.966666
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,7 +27,7 @@ tracks/0/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("4_myqbf")
 }],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.13333334)
 }
 tracks/0/use_blend = true
 tracks/1/type = "method"
@@ -37,7 +37,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 9.1, 9.733334),
+"times": PackedFloat32Array(0, 0.8333333, 9.233334, 9.866667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],

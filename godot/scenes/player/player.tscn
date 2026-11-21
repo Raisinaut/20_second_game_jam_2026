@@ -4,16 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://ckub2rmaqftko" path="res://assets/textures/reticles/crosshair-086.png" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://2k6qewgli2i3" path="res://scenes/player/detection_ray.gd" id="2_gmlin"]
 [ext_resource type="Script" uid="uid://iknsftdmwyp" path="res://scenes/player/hand_position.gd" id="3_lvxji"]
-[ext_resource type="Script" uid="uid://bysc1lxgx3cf5" path="res://scenes/player/blink_timer.gd" id="4_fm80t"]
+[ext_resource type="Script" uid="uid://bysc1lxgx3cf5" path="res://scenes/player/blink/blink_timer.gd" id="4_fm80t"]
 [ext_resource type="Texture2D" uid="uid://bqpbkx4kbbe40" path="res://assets/textures/icons/icon_closed_eye.png" id="5_0owmy"]
 [ext_resource type="Shader" uid="uid://dvx18atpmlc16" path="res://shaders/eyelid_blink.gdshader" id="5_p47bc"]
-[ext_resource type="Script" uid="uid://1txdb77f6hi3" path="res://scenes/player/screen_blink.gd" id="6_75vfm"]
+[ext_resource type="Script" uid="uid://1txdb77f6hi3" path="res://scenes/player/blink/screen_blink.gd" id="6_75vfm"]
 [ext_resource type="FontFile" uid="uid://jd6m8sku4p2" path="res://assets/fonts/Germania_One/GermaniaOne-Regular.ttf" id="7_h17s1"]
 [ext_resource type="Script" uid="uid://k151nb7axhnx" path="res://scenes/player/interaction_ui.gd" id="7_je7p5"]
 [ext_resource type="Texture2D" uid="uid://lwhscsdarwba" path="res://assets/textures/icons/progress_ring.png" id="7_qek5x"]
 [ext_resource type="FontFile" uid="uid://bh0h3emcs11mc" path="res://assets/fonts/New_Rocker/NewRocker-Regular.ttf" id="9_5gtgg"]
 [ext_resource type="Script" uid="uid://b4xbbxxxgaxgd" path="res://general/utility/alpha_flasher.gd" id="9_fcs02"]
-[ext_resource type="Script" uid="uid://ssh031oa0qfu" path="res://scenes/player/blink_progess.gd" id="11_gx1jg"]
+[ext_resource type="Script" uid="uid://ssh031oa0qfu" path="res://scenes/player/blink/blink_progess.gd" id="11_gx1jg"]
+[ext_resource type="Script" uid="uid://cp5j2ixmcg7be" path="res://scenes/player/hallucination/hallucination.gd" id="15_fcs02"]
+[ext_resource type="Theme" uid="uid://cjluc4nvk0ein" path="res://themes/hallucination/hallucination_theme.tres" id="15_myrg7"]
+[ext_resource type="Shader" uid="uid://btpeb6ralt2oo" path="res://shaders/screen_warp.gdshader" id="17_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://c00udalt2ktrv" path="res://assets/textures/temp/test_screenshot.png" id="18_uf5tr"]
+[ext_resource type="Script" uid="uid://cfpyp8at8lsqc" path="res://scenes/player/hallucination/instructions.gd" id="19_lgqa7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvnae"]
 
@@ -21,20 +26,6 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_bvnae"]
 size = Vector3(0.3, 0.3, 0.3)
-
-[sub_resource type="GDScript" id="GDScript_ugbui"]
-script/source = "extends MarginContainer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75vfm"]
 
@@ -45,6 +36,35 @@ font_size = 26
 [sub_resource type="LabelSettings" id="LabelSettings_37yhw"]
 font = ExtResource("7_h17s1")
 font_size = 34
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvnae"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8ydkj"]
+noise_type = 2
+seed = -7
+frequency = 0.0101
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lgqa7"]
+noise = SubResource("FastNoiseLite_8ydkj")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvlxm"]
+shader = ExtResource("17_kvlxm")
+shader_parameter/refraction_map = SubResource("NoiseTexture2D_lgqa7")
+shader_parameter/refraction_stretch = Vector2(1, 1)
+shader_parameter/refraction_strength = 0.018000000855
+shader_parameter/water_tint = Color(0, 0.131697, 0.057640247, 0.5764706)
+shader_parameter/speed = 0.0630000029925
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_myrg7"]
+
+[sub_resource type="Gradient" id="Gradient_uf5tr"]
+offsets = PackedFloat32Array(0, 0.29098362, 0.67622954, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.6431373, 0, 0, 0, 0.6431373, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bvnae"]
+gradient = SubResource("Gradient_uf5tr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvnae"]
 shader = ExtResource("5_p47bc")
@@ -129,7 +149,6 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 50
-script = SubResource("GDScript_ugbui")
 
 [node name="ProgressContainer" type="PanelContainer" parent="Overlay/BlinkUI" unique_id=2027282907]
 layout_mode = 2
@@ -196,6 +215,108 @@ size_flags_vertical = 8
 text = "Use [ITEM] with [OTHER ITEM]"
 label_settings = SubResource("LabelSettings_37yhw")
 horizontal_alignment = 1
+
+[node name="Hallucination" type="PanelContainer" parent="Overlay" unique_id=311937216]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_myrg7")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bvnae")
+script = ExtResource("15_fcs02")
+
+[node name="ScreenEfffects" type="MarginContainer" parent="Overlay/Hallucination" unique_id=1695994829]
+layout_mode = 2
+
+[node name="EffectTest" type="TextureRect" parent="Overlay/Hallucination/ScreenEfffects" unique_id=364824385]
+visible = false
+layout_mode = 2
+texture = ExtResource("18_uf5tr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Distortion" type="TextureRect" parent="Overlay/Hallucination/ScreenEfffects" unique_id=721777736]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kvlxm")
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_myrg7")
+
+[node name="Instructions" type="MarginContainer" parent="Overlay/Hallucination" unique_id=1169595454 node_paths=PackedStringArray("items_to_show")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("19_lgqa7")
+items_to_show = [NodePath("MarginContainer/VBoxContainer/Header"), NodePath("MarginContainer/VBoxContainer/Subheader"), NodePath("MarginContainer/VBoxContainer/VBoxContainer/Ingredient1"), NodePath("MarginContainer/VBoxContainer/VBoxContainer/Ingredient2"), NodePath("MarginContainer/VBoxContainer/VBoxContainer/Ingredient3")]
+
+[node name="TextBackground" type="TextureRect" parent="Overlay/Hallucination/Instructions" unique_id=1095180543]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = SubResource("GradientTexture2D_bvnae")
+
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/Hallucination/Instructions" unique_id=632191269]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Hallucination/Instructions/MarginContainer" unique_id=612217589]
+layout_mode = 2
+
+[node name="Header" type="RichTextLabel" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer" unique_id=309427825]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[wave amp=40.0 freq=2.0 connected=0]To Lift Your Curse[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subheader" type="RichTextLabel" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer" unique_id=94487986]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave amp=40.0 freq=2.0 connected=0]Into your pot,
+combine these ingredients...[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer" unique_id=534011487]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer" unique_id=1206362268]
+layout_mode = 2
+
+[node name="Ingredient1" type="RichTextLabel" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1069905131]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[wave amp=40.0 freq=3.0 connected=0]Ash of Balsam[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ingredient2" type="RichTextLabel" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1009792761]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[wave amp=40.0 freq=3.0 connected=0]Cyan Fungus[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ingredient3" type="RichTextLabel" parent="Overlay/Hallucination/Instructions/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1862560850]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[wave amp=40.0 freq=3.0 connected=0]Instant Ramen[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScreenBlink" type="TextureRect" parent="Overlay" unique_id=1450731051]
 unique_name_in_owner = true

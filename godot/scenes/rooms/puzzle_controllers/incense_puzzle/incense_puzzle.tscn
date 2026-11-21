@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bd5r14kut7u24"]
+
+[ext_resource type="Script" uid="uid://ui35uj8l8x7l" path="res://scenes/rooms/puzzle_controllers/incense_puzzle/incense_puzzle.gd" id="1_7473n"]
+
+[node name="IncensePuzzle" type="Node" unique_id=1938728787]
+script = ExtResource("1_7473n")
+target = Array[String](["Balsam", "Rose"])
+
+[node name="ValidityCheckTimer" type="Timer" parent="." unique_id=1101647407]
+unique_name_in_owner = true
+wait_time = 3.0

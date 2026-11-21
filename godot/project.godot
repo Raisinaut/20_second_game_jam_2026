@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://bdddmewitv8tm"
 [autoload]
 
 ParticleManager="*uid://dkfsvqvs8mdbt"
+GameManager="*uid://c8hjcr2esgrkq"
 
 [display]
 
@@ -33,6 +34,7 @@ window/stretch/aspect="expand"
 [global_group]
 
 melody_member=""
+scent_puzzle=""
 
 [input]
 

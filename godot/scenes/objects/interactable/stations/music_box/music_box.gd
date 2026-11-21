@@ -11,7 +11,6 @@ extends StaticBody3D
 func _ready() -> void:
 	key.hide()
 
-
 func interact(with_item: Item) -> void:
 	if !with_item:
 		print("I'm not holding anything.")
@@ -28,17 +27,17 @@ func interact(with_item: Item) -> void:
 		if not animation_player.is_playing():
 			animation_player.play("play_melody")
 		await animation_player.animation_finished
-		# Hide music box key model
+		# Hide music box key modelwWWwww
 		key.hide()
 		# Respawn key item
 		with_item.visible = true
 		with_item.return_to_spawn(false)
 
 func move_to_self(node: Node3D) -> Tween:
-	var move_duration: float = 0.4
+	var move_duration: float = 0.0
 	var t = create_tween().set_ease(Tween.EASE_OUT)
-	t.tween_property(node, "global_position", global_position, move_duration)
-	t.parallel().tween_property(node, "scale", node.scale * 0.5, move_duration)
+	t.tween_property(node, "global_position", key.global_position, move_duration)
+	t.parallel().tween_property(node, "scale", node.scale * 0.6, move_duration)
 	return t
 
 
